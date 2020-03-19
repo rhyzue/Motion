@@ -1,4 +1,4 @@
-package com.rhyzue.motion.ui.home
+package com.rhyzue.motion.ui.schedule
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rhyzue.motion.R
 
-class HomeFragment : Fragment() {
+class ScheduleFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var scheduleViewModel: ScheduleViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        scheduleViewModel =
+                ViewModelProviders.of(this).get(ScheduleViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_schedule, container, false)
+        val textView: TextView = root.findViewById(R.id.text_schedule)
+        scheduleViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
