@@ -6,28 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".ui.schedule.ScheduleFragment">
 
-    <TextView
-        android:id="@+id/text_schedule"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Schedule"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <RadioGroup
+            android:id="@+id/schedule_type_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:checkedButton="@+id/radio_month"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radio_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onScheduleTypeChange"
+                android:text="Month" />
+
+            <RadioButton
+                android:id="@+id/radio_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onScheduleTypeChange"
+                android:text="Week" />
+
+            <RadioButton
+                android:id="@+id/radio_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onScheduleTypeChange"
+                android:text="Day" />
+
+        </RadioGroup>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
