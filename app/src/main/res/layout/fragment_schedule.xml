@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:checkedButton="@+id/radio_month"
             android:orientation="vertical"
@@ -31,21 +31,18 @@
                 android:id="@+id/radio_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onScheduleTypeChange"
                 android:text="Month" />
 
             <RadioButton
                 android:id="@+id/radio_week"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onScheduleTypeChange"
                 android:text="Week" />
 
             <RadioButton
                 android:id="@+id/radio_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onScheduleTypeChange"
                 android:text="Day" />
 
         </RadioGroup>
