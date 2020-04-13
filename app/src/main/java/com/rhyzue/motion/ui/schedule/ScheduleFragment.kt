@@ -32,6 +32,11 @@ class ScheduleFragment : Fragment() {
         view.radio_month.setOnClickListener{view -> onScheduleTypeChange(view)}
         view.radio_week.setOnClickListener{view -> onScheduleTypeChange(view)}
         view.radio_day.setOnClickListener{view -> onScheduleTypeChange(view)}
+
+        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+        ft.replace(R.id.calendar_container, MonthFragment())
+        ft.commit()
+
         return view
     }
 
@@ -44,22 +49,19 @@ class ScheduleFragment : Fragment() {
                 R.id.radio_month ->
                     if (checked) {
                         //display month view
-
-                        ft.replace(R.id.child_container, MonthFragment())
+                        ft.replace(R.id.calendar_container, MonthFragment())
                         ft.commit()
                     }
                 R.id.radio_week ->
                     if (checked) {
                         //display week view
-
-                        ft.replace(R.id.child_container, WeekFragment())
+                        ft.replace(R.id.calendar_container, WeekFragment())
                         ft.commit()
                     }
                 R.id.radio_day ->
                     if (checked) {
                         //display day view
-
-                        ft.replace(R.id.child_container, DayFragment())
+                        ft.replace(R.id.calendar_container, DayFragment())
                         ft.commit()
                     }
             }
