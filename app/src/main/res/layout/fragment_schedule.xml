@@ -8,7 +8,7 @@
     tools:context=".ui.schedule.ScheduleFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/scheduleWidgetContainer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#C4D8F8"
@@ -54,24 +54,15 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/calendar_container"
-        android:layout_width="350dp"
-        android:layout_height="500dp"
-        android:background="#FFFFFF"
+    <FrameLayout
+        android:id="@+id/child_container"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:background="#F7A7A7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/scheduleWidgetContainer"></FrameLayout>
 
-        <ViewStub
-            android:id="@+id/calendar_stub"
-            android:inflatedId="@+id/calendar_c"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ViewStub>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
