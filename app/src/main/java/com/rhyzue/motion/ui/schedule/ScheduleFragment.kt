@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
+import com.rhyzue.motion.ui.schedule.day.DayFragment
 import com.rhyzue.motion.ui.schedule.month.*
+import com.rhyzue.motion.ui.schedule.week.WeekFragment
 import kotlinx.android.synthetic.main.fragment_schedule.view.*
 
 class ScheduleFragment : Fragment() {
@@ -36,28 +38,29 @@ class ScheduleFragment : Fragment() {
     private fun onScheduleTypeChange(view: View) {
         if (view is RadioButton) {
             val checked = view.isChecked
+            val ft: FragmentTransaction = childFragmentManager.beginTransaction()
 
             when (view.getId()) {
                 R.id.radio_month ->
                     if (checked) {
                         //display month view
-                        Log.i("LOG", "button month selected")
-                        println("MONTH")
-                        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+
                         ft.replace(R.id.child_container, MonthFragment())
                         ft.commit()
                     }
                 R.id.radio_week ->
                     if (checked) {
                         //display week view
-                        Log.i("LOG", "button month selected")
-                        println("WEEK")
+
+                        ft.replace(R.id.child_container, WeekFragment())
+                        ft.commit()
                     }
                 R.id.radio_day ->
                     if (checked) {
                         //display day view
-                        Log.i("LOG", "button month selected")
-                        println("DAY")
+
+                        ft.replace(R.id.child_container, DayFragment())
+                        ft.commit()
                     }
             }
         }
