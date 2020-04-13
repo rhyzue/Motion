@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.inflate
 import android.view.ViewGroup
+import android.view.ViewStub
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -17,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_schedule.view.*
 class ScheduleFragment : Fragment() {
 
     private lateinit var scheduleViewModel: ScheduleViewModel
+    private lateinit var childView: View
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -26,13 +29,15 @@ class ScheduleFragment : Fragment() {
         scheduleViewModel =
                 ViewModelProvider(this).get(ScheduleViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
+        childView = inflater.inflate(R.layout.calendar_month, container, false)
+
         view.radio_month.setOnClickListener{view -> onScheduleTypeChange(view)}
         view.radio_week.setOnClickListener{view -> onScheduleTypeChange(view)}
         view.radio_day.setOnClickListener{view -> onScheduleTypeChange(view)}
         return view
     }
 
-    fun onScheduleTypeChange(view: View) {
+    private fun onScheduleTypeChange(view: View) {
         if (view is RadioButton) {
             val checked = view.isChecked
 
@@ -42,6 +47,15 @@ class ScheduleFragment : Fragment() {
                         //display month view
                         Log.i("LOG", "button month selected")
                         println("MONTH")
+
+                        var stub: ViewStub? = childView.findViewById(R.id.calendar_month)
+                        if (stub != null) {
+                            stub.layoutResource = R.layout.calendar_month
+                        }
+                        else{
+                            println("NO STUB FOUND")
+                        }
+                        val inflated: View? = stub?.inflate()
                     }
                 R.id.radio_week ->
                     if (checked) {
