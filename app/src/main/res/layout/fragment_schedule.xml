@@ -11,63 +11,80 @@
         android:id="@+id/scheduleWidgetContainer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="64dp"
+        android:background="#FFC107"
+        android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/calendar_container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <RadioGroup
-            android:id="@+id/schedule_type_selector"
+        <Button
+            android:id="@+id/calendar_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/radiogroup_border"
-            android:checkedButton="@+id/radio_month"
-            android:orientation="vertical"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="10dp"
+            android:text="Calendar" />
 
-            <RadioButton
-                android:id="@+id/radio_month"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Month" />
+        <Button
+            android:id="@+id/unfinishedTasks_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Unfinished Tasks" />
 
-            <RadioButton
-                android:id="@+id/radio_week"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Week" />
-
-            <RadioButton
-                android:id="@+id/radio_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Day" />
-
-        </RadioGroup>
-
+        <Button
+            android:id="@+id/finishedTasks_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Finished Tasks" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/calendar_container"
-        android:layout_width="350dp"
-        android:layout_height="550dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="348dp"
+        android:layout_height="497dp"
+        android:layout_marginBottom="64dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/schedule_type_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radiogroup_border"
+        android:checkedButton="@+id/radio_month"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/scheduleWidgetContainer"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scheduleWidgetContainer" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radio_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month" />
+
+        <RadioButton
+            android:id="@+id/radio_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Week" />
+
+        <RadioButton
+            android:id="@+id/radio_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day" />
+
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
