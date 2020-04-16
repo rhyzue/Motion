@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 
 import com.rhyzue.motion.R
+import kotlinx.android.synthetic.main.day_fragment.view.*
 
 class DayFragment : Fragment() {
 
@@ -22,13 +23,19 @@ class DayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.day_fragment, container, false)
+        val view = inflater.inflate(R.layout.day_fragment, container, false)
+        view.add_task_button.setOnClickListener{onAddTask()}
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DayViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    private fun onAddTask(){
+        println("Adding task")
     }
 
 }

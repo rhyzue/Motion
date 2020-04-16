@@ -1486,6 +1486,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_task_button
 id alertTitle
 id all
 id always
@@ -1714,6 +1715,7 @@ id textStart
 id textView
 id textView2
 id textView3
+id textView4
 id text_dashboard
 id text_input_end_icon
 id text_input_start_icon
