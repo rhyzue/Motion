@@ -46,16 +46,25 @@
 28            </intent-filter>
 29        </activity>
 30
-31        <provider
-31-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
-32            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-32-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
-33            android:authorities="com.rhyzue.motion.lifecycle-process"
-33-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
-34            android:exported="false"
-34-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
-35            android:multiprocess="true" />
-35-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
-36    </application>
-37
-38</manifest>
+31        <service
+31-->[androidx.room:room-runtime:2.2.5] /Users/renh/.gradle/caches/transforms-2/files-2.1/e9626a52cde72a57878ada1138a21e3c/room-runtime-2.2.5/AndroidManifest.xml:25:9-28:40
+32            android:name="androidx.room.MultiInstanceInvalidationService"
+32-->[androidx.room:room-runtime:2.2.5] /Users/renh/.gradle/caches/transforms-2/files-2.1/e9626a52cde72a57878ada1138a21e3c/room-runtime-2.2.5/AndroidManifest.xml:26:13-74
+33            android:directBootAware="true"
+33-->[androidx.room:room-runtime:2.2.5] /Users/renh/.gradle/caches/transforms-2/files-2.1/e9626a52cde72a57878ada1138a21e3c/room-runtime-2.2.5/AndroidManifest.xml:27:13-43
+34            android:exported="false" />
+34-->[androidx.room:room-runtime:2.2.5] /Users/renh/.gradle/caches/transforms-2/files-2.1/e9626a52cde72a57878ada1138a21e3c/room-runtime-2.2.5/AndroidManifest.xml:28:13-37
+35
+36        <provider
+36-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
+37            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+37-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
+38            android:authorities="com.rhyzue.motion.lifecycle-process"
+38-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
+39            android:exported="false"
+39-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
+40            android:multiprocess="true" />
+40-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/renh/.gradle/caches/transforms-2/files-2.1/baba86cab54814236486aa2734bd9aab/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
+41    </application>
+42
+43</manifest>

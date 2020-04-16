@@ -1496,7 +1496,8 @@ id beginning
 id blocking
 id bottom
 id buttonPanel
-id calendarView
+id calendarView2
+id calendar_button
 id calendar_container
 id cancel_action
 id cancel_button
@@ -1522,7 +1523,6 @@ id custom
 id customPanel
 id cut
 id date_picker_actions
-id day_container
 id decor_content_parent
 id default_activity_button
 id design_bottom_sheet
@@ -1549,6 +1549,7 @@ id fill_horizontal
 id fill_vertical
 id filled
 id filter_chip
+id finishedTasks_button
 id fitToContents
 id fixed
 id forever
@@ -1710,6 +1711,7 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView
 id textView2
 id textView3
 id text_dashboard
@@ -1732,6 +1734,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id unchecked
+id unfinishedTasks_button
 id uniform
 id unlabeled
 id up
