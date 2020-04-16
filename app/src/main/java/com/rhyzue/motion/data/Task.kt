@@ -18,8 +18,6 @@ data class Task(
 
 @Dao
 interface TaskDao{
-    @Query("SELECT * FROM task")
-    fun getAll(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task WHERE date_assigned = (:date)")
     fun getTaskByDate(date: Date): LiveData<List<Task>>
@@ -33,8 +31,6 @@ interface TaskDao{
 }
 
 class TaskRepository(private val taskDao: TaskDao) {
-
-    val allTasks: LiveData<List<Task>> = taskDao.getAll()
 
     fun getTaskByDate(date: Date) {
         taskDao.getTaskByDate(date)
