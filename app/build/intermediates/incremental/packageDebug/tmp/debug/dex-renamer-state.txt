@@ -1,4 +1,4 @@
-#Sun Apr 19 14:48:56 EDT 2020
+#Sun Apr 19 15:20:00 EDT 2020
 base.0=/Users/renh/Desktop/2-Projects/Motion/app/build/intermediates/dex/debug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
