@@ -1,6 +1,5 @@
 package com.rhyzue.motion.ui.schedule.day
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 
 import com.rhyzue.motion.R
+import com.rhyzue.motion.data.Task
 import kotlinx.android.synthetic.main.day_fragment.view.*
+import java.text.SimpleDateFormat
 
 class DayFragment : Fragment() {
 
@@ -36,6 +37,9 @@ class DayFragment : Fragment() {
 
     private fun onAddTask(){
         println("Adding task")
+        var format = SimpleDateFormat("yyyy-mm-dd")
+        var task = Task(null,"test", 1, format.parse("2020-04-05"), false, null, false, null)
+        viewModel.insert(task)
     }
 
 }

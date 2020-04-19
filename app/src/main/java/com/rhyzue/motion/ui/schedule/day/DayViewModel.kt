@@ -15,7 +15,7 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: TaskRepository
 
     init {
-        val taskDao = AppDatabase.getDatabase(application).TaskDao()
+        val taskDao = AppDatabase.getDatabase(application, viewModelScope).taskDao()
         repository = TaskRepository(taskDao)
     }
 

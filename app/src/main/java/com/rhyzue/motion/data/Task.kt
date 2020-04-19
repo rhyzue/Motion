@@ -6,7 +6,7 @@ import java.util.*
 
 @Entity
 data class Task(
-    @PrimaryKey val id: Int,
+    @PrimaryKey val id: Int?,
     @ColumnInfo val name: String,
     @ColumnInfo val type: Int?,
     @ColumnInfo val date_assigned: Date,
