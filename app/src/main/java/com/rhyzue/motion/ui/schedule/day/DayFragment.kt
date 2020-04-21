@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 
 import com.rhyzue.motion.R
@@ -40,6 +41,14 @@ class DayFragment : Fragment() {
         var format = SimpleDateFormat("yyyy-mm-dd")
         var task = Task(null,"test", 1, format.parse("2020-04-05"), false, null, false, null)
         viewModel.insert(task)
+        val tasks: List<Task>? = viewModel.allTasks.value
+
+        if (tasks != null) {
+            for(task in tasks){
+                println(task.name)
+            }
+        }
+
     }
 
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import java.util.*
 
-@Entity
+@Entity(tableName = "task")
 data class Task(
     @PrimaryKey val id: Int?,
     @ColumnInfo val name: String,
@@ -19,6 +19,9 @@ data class Task(
 @Dao
 interface TaskDao{
 
+    @Query("SELECT * FROM task")
+    fun getAllTasks(): LiveData<List<Task>>
+
     @Query("SELECT * FROM task WHERE date_assigned = (:date)")
     fun getTaskByDate(date: Date): LiveData<List<Task>>
 
@@ -31,6 +34,12 @@ interface TaskDao{
 }
 
 class TaskRepository(private val taskDao: TaskDao) {
+
+    val allTasks: LiveData<List<Task>> = taskDao.getAllTasks()
+
+    fun getAllTasks(){
+        taskDao.getAllTasks()
+    }
 
     fun getTaskByDate(date: Date) {
         taskDao.getTaskByDate(date)

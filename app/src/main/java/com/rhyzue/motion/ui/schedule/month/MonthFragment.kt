@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.rhyzue.motion.R
@@ -17,12 +19,16 @@ class MonthFragment : Fragment() {
     }
 
     private lateinit var viewModel: MonthViewModel
+    private lateinit var dayTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.month_fragment, container, false)
+
+        val view = inflater.inflate(R.layout.month_fragment, container, false)
+        dayTextView = view.findViewById(R.id.textView)
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
