@@ -9,7 +9,7 @@
 
 ## Development
 Motion is currently in development. 
-We are using Android Studio IDE, Kotlin programming language, and ROOM persistance library for database access.. 
+We are using Android Studio IDE, Kotlin programming language, and ROOM persistance library for database access. 
 
 ## Build
 1. Clone this repository
