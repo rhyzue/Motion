@@ -6,7 +6,7 @@ import java.util.*
 
 @Entity(tableName = "task")
 data class Task(
-    @PrimaryKey val id: Int?,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo val name: String,
     @ColumnInfo val type: Int?,
     @ColumnInfo val date_assigned: Date,
@@ -29,7 +29,7 @@ interface TaskDao{
     fun getTaskByCompletion(complete: Boolean): LiveData<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(task: Task)
+    fun insert(task: Task):Long
 
 }
 
@@ -49,7 +49,7 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.getTaskByCompletion(complete)
     }
 
-    suspend fun insert(task: Task){
+    fun insert(task: Task){
         taskDao.insert(task)
     }
 }

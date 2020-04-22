@@ -39,7 +39,7 @@ class DayFragment : Fragment() {
     private fun onAddTask(){
         println("Adding task")
         var format = SimpleDateFormat("yyyy-mm-dd")
-        var task = Task(null,"test", 1, format.parse("2020-04-05"), false, null, false, null)
+        var task = Task(name="dayInsertTest", type=1, date_assigned = format.parse("2020-04-05"),complete=false, deadline=null, auto_push = false, goal_id=null)
         viewModel.insert(task)
         val tasks: List<Task>? = viewModel.allTasks.value
 

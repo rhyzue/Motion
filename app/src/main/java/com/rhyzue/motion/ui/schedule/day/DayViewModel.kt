@@ -22,7 +22,9 @@ class DayViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun insert(task: Task) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(task)
+        val pr = repository.insert(task)
+        println("inserting from view model")
+        println(pr)
     }
 
 }

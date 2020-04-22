@@ -29,15 +29,17 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "motion_database"
-                ).build()
+                    "motion_database.db"
+                ).addCallback(TaskDatabaseCallback(scope))
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 return instance
             }
         }
     }
 
-    private class WordDatabaseCallback(
+    private class TaskDatabaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
@@ -50,10 +52,12 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        suspend fun populateDatabase(taskDao: TaskDao) {
+        fun populateDatabase(taskDao: TaskDao) {
             var format = SimpleDateFormat("yyyy-mm-dd")
-            var task = Task(null,"beginInsertTest", 1, format.parse("2020-04-05"), false, null, false, null)
-            taskDao.insert(task)
+            var task = Task(name="beginInsertTest", type=1, date_assigned = format.parse("2020-04-05"),complete=false, deadline=null, auto_push = false, goal_id=null)
+            val pr = taskDao.insert(task)
+            println(pr)
+            println("add")
         }
     }
 }
