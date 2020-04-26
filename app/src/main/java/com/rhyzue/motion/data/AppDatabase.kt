@@ -53,6 +53,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         fun populateDatabase(taskDao: TaskDao) {
+            taskDao.deleteAll()
             var format = SimpleDateFormat("yyyy-mm-dd")
             var task = Task(name="beginInsertTest", type=1, date_assigned = format.parse("2020-04-05"),complete=false, deadline=null, auto_push = false, goal_id=null)
             val pr = taskDao.insert(task)

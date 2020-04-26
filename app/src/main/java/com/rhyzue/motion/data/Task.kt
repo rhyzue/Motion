@@ -31,6 +31,9 @@ interface TaskDao{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(task: Task):Long
 
+    @Query("DELETE FROM task")
+    fun deleteAll()
+
 }
 
 class TaskRepository(private val taskDao: TaskDao) {
@@ -52,4 +55,5 @@ class TaskRepository(private val taskDao: TaskDao) {
     fun insert(task: Task){
         taskDao.insert(task)
     }
+
 }
