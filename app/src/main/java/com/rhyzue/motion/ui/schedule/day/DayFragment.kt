@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
+import com.rhyzue.motion.ui.schedule.tasks.TasksFragment
 import kotlinx.android.synthetic.main.day_fragment.view.*
 import java.text.SimpleDateFormat
 
@@ -27,6 +29,11 @@ class DayFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.day_fragment, container, false)
         view.add_task_button.setOnClickListener{onAddTask()}
+
+        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+        ft.replace(R.id.tasks_container, TasksFragment())
+        ft.commit()
+
         return view
     }
 
@@ -39,7 +46,14 @@ class DayFragment : Fragment() {
     private fun onAddTask(){
         println("Adding task")
         var format = SimpleDateFormat("yyyy-mm-dd")
-        var task = Task(name="dayInsertTest", type=1, date_assigned = format.parse("2020-04-05"),complete=false, deadline=null, auto_push = false, goal_id=null)
+        var task = Task(name="dayInsertTest",
+                        type=1,
+                        date_assigned = format.parse("2020-04-05"),
+                        complete=false,
+                        deadline=null,
+                        auto_push = false,
+                        goal_id=null)
+
         viewModel.insert(task)
         val tasks: List<Task>? = viewModel.allTasks.value
 
