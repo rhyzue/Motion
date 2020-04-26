@@ -17,11 +17,11 @@ class TaskListAdapter internal constructor(
     private var tasks = emptyList<Task>() // Cached copy of words
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val taskItemView: TextView = itemView.findViewById(R.id.task_text) //TODO: IMPLEMENT TASK ITEM
+        val taskItemView: TextView = itemView.findViewById(R.id.task_text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val itemView = inflater.inflate(R.layout.task_rc_item, parent, false) //TODO: IMPLEMENT
+        val itemView = inflater.inflate(R.layout.task_recycler_item, parent, false)
         return TaskViewHolder(itemView)
     }
 
@@ -31,7 +31,11 @@ class TaskListAdapter internal constructor(
     }
 
     internal fun setTasks(tasks: List<Task>) {
+        println("ADAPTER SET TASKS")
         this.tasks = tasks
+        for(task in tasks){
+            println(task.name)
+        }
         notifyDataSetChanged()
     }
 

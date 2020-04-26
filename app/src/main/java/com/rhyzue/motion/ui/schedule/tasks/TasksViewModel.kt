@@ -14,9 +14,12 @@ import kotlinx.coroutines.launch
 class TasksViewModel(application: Application) : AndroidViewModel(application){
     private val repository: TaskRepository
 
+    public val allTasks: LiveData<List<Task>>
+
     init {
         val taskDao = AppDatabase.getDatabase(application, viewModelScope).taskDao()
         repository = TaskRepository(taskDao)
+        allTasks = repository.allTasks
     }
 
 }
