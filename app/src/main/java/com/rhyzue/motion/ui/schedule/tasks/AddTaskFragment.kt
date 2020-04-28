@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.rhyzue.motion.R
 
 class AddTaskFragment : DialogFragment() {
 
@@ -13,7 +14,8 @@ class AddTaskFragment : DialogFragment() {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            builder.setMessage("test message")
+            val inflater = requireActivity().layoutInflater;
+            builder.setView(inflater.inflate(R.layout.add_task_fragment, null))
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
                         // FIRzE ZE MISSILES!
@@ -26,5 +28,4 @@ class AddTaskFragment : DialogFragment() {
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-
 }
