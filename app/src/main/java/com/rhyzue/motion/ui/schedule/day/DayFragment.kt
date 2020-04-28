@@ -18,6 +18,7 @@ import com.rhyzue.motion.ui.schedule.tasks.TasksFragment
 import kotlinx.android.synthetic.main.day_fragment.view.*
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class DayFragment : Fragment() {
@@ -42,7 +43,9 @@ class DayFragment : Fragment() {
         view.btn_prev_day.setOnClickListener{onSwitchDay("prev")}
         view.btn_next_day.setOnClickListener{onSwitchDay("next")}
         dateTextView = view.findViewById(R.id.date_textView)
-        dateTextView.text = day.toString()
+        var format = DateTimeFormatter.ofPattern("dd MMM uuuu")
+        dateTextView.text=day.format(format)
+
 
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
         ft.replace(R.id.tasks_container, TasksFragment())
