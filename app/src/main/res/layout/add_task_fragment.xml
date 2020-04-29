@@ -1,7 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="200dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode ="true"
+    android:clickable="true">
 
     <TextView
         android:layout_width="fill_parent"
@@ -50,28 +53,10 @@
             android:id="@+id/types_spinner"
             android:layout_marginLeft="10dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-
-        <Button
-            android:id="@+id/expand_dialog_btn"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text ="expand"
-            android:layout_gravity="right" />
-
+            android:focusable="true"
+            android:focusableInTouchMode ="true"
+            android:clickable="true"/>
     </LinearLayout>
 
     <LinearLayout
@@ -89,7 +74,10 @@
             android:id="@+id/goals_spinner"
             android:layout_marginLeft="10dp"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode ="true"
+            android:clickable="true"/>
     </LinearLayout>
 
     <LinearLayout
@@ -104,28 +92,13 @@
             android:text="No Deadline " />
 
         <Button
+            android:id="@+id/select_deadline_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Push when incomplete " />
-
-        <CheckBox
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -139,6 +112,7 @@
             android:text="Complete " />
 
         <CheckBox
+            android:id="@+id/complete_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp" />

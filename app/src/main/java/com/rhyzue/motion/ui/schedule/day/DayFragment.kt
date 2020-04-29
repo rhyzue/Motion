@@ -61,28 +61,6 @@ class DayFragment : Fragment() {
     private fun onAddTask(){
         val dialog = AddTaskFragment()
         dialog.show(childFragmentManager, "addTask")
-
-
-
-        println("Adding task")
-        var format = SimpleDateFormat("yyyy-mm-dd")
-        var task = Task(name="dayInsertTest",
-                        type=1,
-                        date_assigned = format.parse("2020-04-05"),
-                        complete=false,
-                        deadline=null,
-                        auto_push = false,
-                        goal_id=null)
-
-        viewModel.insert(task)
-        val tasks: List<Task>? = viewModel.allTasks.value
-
-        if (tasks != null) {
-            for(task in tasks){
-                println(task.name)
-            }
-        }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

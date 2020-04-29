@@ -8,15 +8,14 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 
-@Database(entities = [Task::class], version = 1, exportSchema = false)
+@Database(entities = [Task::class, Type::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
+    abstract fun typeDao(): TypeDao
 
     companion object {
-        //writes to this field are immediately made visible to other threads
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
@@ -30,7 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "motion_database.db"
-                ).addCallback(TaskDatabaseCallback(scope))
+                ).addCallback(AppDatabaseCallback(scope))
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
@@ -39,7 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    private class TaskDatabaseCallback(
+    private class AppDatabaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
@@ -47,18 +46,16 @@ abstract class AppDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    populateDatabase(database.taskDao())
+                    populateDatabase(database.taskDao(), database.typeDao())
                 }
             }
         }
 
-        fun populateDatabase(taskDao: TaskDao) {
+        fun populateDatabase(taskDao: TaskDao, typeDao: TypeDao) {
             taskDao.deleteAll()
-            var format = SimpleDateFormat("yyyy-mm-dd")
-            var task = Task(name="beginInsertTest", type=1, date_assigned = format.parse("2020-04-05"),complete=false, deadline=null, auto_push = false, goal_id=null)
-            val pr = taskDao.insert(task)
-            println(pr)
-            println("add")
+            typeDao.deleteAll()
+            val type = Type(name="None", description=null, color="#ffffff")
+            typeDao.insert(type)
         }
     }
 }

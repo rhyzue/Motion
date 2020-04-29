@@ -8,12 +8,11 @@ import java.util.*
 data class Task(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo val name: String,
-    @ColumnInfo val type: Int?,
+    @ColumnInfo val type: Int,
     @ColumnInfo val date_assigned: Date,
     @ColumnInfo val complete: Boolean,
     @ColumnInfo val deadline: Date?,
-    @ColumnInfo val auto_push: Boolean,
-    @ColumnInfo val goal_id: Int?
+    @ColumnInfo val goal_id: Int
 )
 
 @Dao

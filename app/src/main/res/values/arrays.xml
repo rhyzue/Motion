@@ -4,8 +4,11 @@
         <item>
             None
         </item>
+    </string-array>
+
+    <string-array name="goals_array">
         <item>
-            test
+            None
         </item>
     </string-array>
 </resources>
