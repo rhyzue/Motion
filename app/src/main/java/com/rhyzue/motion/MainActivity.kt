@@ -2,8 +2,11 @@ package com.rhyzue.motion
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -25,6 +28,18 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dashboard, R.id.navigation_schedule, R.id.navigation_goals))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        //printStuff()
+    }
+
+    private fun printStuff(){
+        //val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        val viewModel: MainViewModel by viewModels()
+
+        var types = viewModel.getAllTypes()
+        for(i in types.value!!){
+            println(i.name)
+        }
 
     }
 

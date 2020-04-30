@@ -1,6 +1,5 @@
 package com.rhyzue.motion.ui.schedule.tasks
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -8,12 +7,8 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
@@ -21,7 +16,7 @@ import com.rhyzue.motion.data.Type
 import androidx.lifecycle.Observer
 import java.util.*
 
-class AddTaskFragment : DialogFragment(){
+class AddTaskDialog : DialogFragment(){
 
     private var types = emptyList<Type>()
     private lateinit var viewModel: TasksViewModel
@@ -43,10 +38,6 @@ class AddTaskFragment : DialogFragment(){
                     })
                 .setNegativeButton("cancel",
                     DialogInterface.OnClickListener { dialog, _ ->
-                        println("TYPES")
-                        for(i in viewModel.allTypes.value!!){
-                            println(i.name)
-                        }
                         dialog.cancel()
                     })
             builder.create()
@@ -93,6 +84,8 @@ class AddTaskFragment : DialogFragment(){
             }
         })
         types_spinner.setSelection(0)
+
+        dialog.findViewById<Button>(R.id.select_deadline_btn).setOnClickListener { showDatePicker() }
     }
 
     private fun onSubmit(){
@@ -111,6 +104,11 @@ class AddTaskFragment : DialogFragment(){
         if (task != null) {
             viewModel.insertTask(task)
         }
+    }
+
+    private fun showDatePicker(){
+        val dateTimePicker = DateTimePickerDialog()
+        dateTimePicker.show(childFragmentManager, "dateTimePicker")
     }
 
     private fun hideSoftKeyboard(view: View){

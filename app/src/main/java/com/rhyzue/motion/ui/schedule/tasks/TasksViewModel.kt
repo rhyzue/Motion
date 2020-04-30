@@ -28,6 +28,13 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
 
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
         val pr = taskRepo.insert(task)
+        println(pr)
     }
+
+    fun insertType(type: Type) = viewModelScope.launch(Dispatchers.IO) {
+        val pr = typeRepo.insert(type)
+        println(pr)
+    }
+
 
 }

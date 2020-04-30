@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Database(entities = [Task::class, Type::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -52,11 +53,13 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         fun populateDatabase(taskDao: TaskDao, typeDao: TypeDao) {
-            taskDao.deleteAll()
-            typeDao.deleteAll()
             val type = Type(id=0,name="None", description="None", color="#ffffff")
-            typeDao.insert(type)
+            var task = Task(name="beginInsertTest", type=0, date_assigned = Date(),complete=false, deadline=null, goal_id=0)
+            val pr = taskDao.insert(task)
+            val pr2 = typeDao.insert(type)
             println("ADDED TYPES")
+            println(pr)
+            println(pr2)
         }
     }
 }

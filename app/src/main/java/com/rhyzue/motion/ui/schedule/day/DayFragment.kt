@@ -12,11 +12,9 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 
 import com.rhyzue.motion.R
-import com.rhyzue.motion.data.Task
-import com.rhyzue.motion.ui.schedule.tasks.AddTaskFragment
+import com.rhyzue.motion.ui.schedule.tasks.AddTaskDialog
 import com.rhyzue.motion.ui.schedule.tasks.TasksFragment
 import kotlinx.android.synthetic.main.day_fragment.view.*
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -59,7 +57,7 @@ class DayFragment : Fragment() {
     }
 
     private fun onAddTask(){
-        val dialog = AddTaskFragment()
+        val dialog = AddTaskDialog()
         dialog.show(childFragmentManager, "addTask")
     }
 
