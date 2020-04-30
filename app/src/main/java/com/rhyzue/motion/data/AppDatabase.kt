@@ -54,8 +54,9 @@ abstract class AppDatabase : RoomDatabase() {
         fun populateDatabase(taskDao: TaskDao, typeDao: TypeDao) {
             taskDao.deleteAll()
             typeDao.deleteAll()
-            val type = Type(name="None", description=null, color="#ffffff")
+            val type = Type(id=0,name="None", description="None", color="#ffffff")
             typeDao.insert(type)
+            println("ADDED TYPES")
         }
     }
 }

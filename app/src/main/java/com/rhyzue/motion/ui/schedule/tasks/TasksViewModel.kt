@@ -3,7 +3,6 @@ package com.rhyzue.motion.ui.schedule.tasks
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rhyzue.motion.data.*
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +24,10 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
 
         allTasks = taskRepo.allTasks
         allTypes = typeRepo.allTypes
+    }
+
+    fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
+        val pr = taskRepo.insert(task)
     }
 
 }

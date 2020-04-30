@@ -43,6 +43,10 @@ class AddTaskFragment : DialogFragment(){
                     })
                 .setNegativeButton("cancel",
                     DialogInterface.OnClickListener { dialog, _ ->
+                        println("TYPES")
+                        for(i in viewModel.allTypes.value!!){
+                            println(i.name)
+                        }
                         dialog.cancel()
                     })
             builder.create()
@@ -95,11 +99,18 @@ class AddTaskFragment : DialogFragment(){
         val dialog = requireDialog()
 
         val name: String = dialog.findViewById<EditText>(R.id.task_name_editText).text.toString()
+        val type_name: String = dialog.findViewById<Spinner>(R.id.types_spinner).selectedItem.toString()
+
         val deadline: Date? = null
         val complete: Boolean = dialog.findViewById<CheckBox>(R.id.complete_checkbox).isChecked
 
-        val task = Task(name=name,type=0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline)
-        println("SUBMIT "+task.name)
+        val type_pkey = types.find{ x -> x.name==type_name}?.id
+
+        val task = type_pkey?.let { Task(name=name,type = it,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline) }
+
+        if (task != null) {
+            viewModel.insertTask(task)
+        }
     }
 
     private fun hideSoftKeyboard(view: View){
