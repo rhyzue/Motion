@@ -14,9 +14,11 @@ import java.util.*
 
 
 class DateTimePickerDialog : DialogFragment() {
+    private var addTaskDialog = AddTaskDialog()
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
@@ -29,6 +31,7 @@ class DateTimePickerDialog : DialogFragment() {
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, _ ->
+                        addTaskDialog.setDeadline(null)
                         dialog.cancel()
                     })
             builder.create()
@@ -49,7 +52,6 @@ class DateTimePickerDialog : DialogFragment() {
             timePicker.minute
         )
 
-        println(date.toString())
-
+        addTaskDialog.setDeadline(date.time)
     }
 }

@@ -21,6 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
+            println("GET DATABASE")
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance

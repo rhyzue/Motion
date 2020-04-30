@@ -19,6 +19,7 @@ import java.util.*
 class AddTaskDialog : DialogFragment(){
 
     private var types = emptyList<Type>()
+    private var deadline: Date? = null
     private lateinit var viewModel: TasksViewModel
     private lateinit var types_adapter: ArrayAdapter<String>
     private lateinit var fragment: DialogFragment
@@ -92,14 +93,15 @@ class AddTaskDialog : DialogFragment(){
         val dialog = requireDialog()
 
         val name: String = dialog.findViewById<EditText>(R.id.task_name_editText).text.toString()
-        val type_name: String = dialog.findViewById<Spinner>(R.id.types_spinner).selectedItem.toString()
+        //val type_name: String = dialog.findViewById<Spinner>(R.id.types_spinner).selectedItem.toString()
 
-        val deadline: Date? = null
         val complete: Boolean = dialog.findViewById<CheckBox>(R.id.complete_checkbox).isChecked
 
-        val type_pkey = types.find{ x -> x.name==type_name}?.id
+        //val type_pkey = types.find{ x -> x.name==type_name}?.id
 
-        val task = type_pkey?.let { Task(name=name,type = it,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline) }
+        //val task = type_pkey?.let { Task(name=name,type = 0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline) }
+
+        val task = Task(name=name,type = 0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline)
 
         if (task != null) {
             viewModel.insertTask(task)
@@ -109,6 +111,10 @@ class AddTaskDialog : DialogFragment(){
     private fun showDatePicker(){
         val dateTimePicker = DateTimePickerDialog()
         dateTimePicker.show(childFragmentManager, "dateTimePicker")
+    }
+
+    fun setDeadline(date: Date?){
+        deadline = date
     }
 
     private fun hideSoftKeyboard(view: View){

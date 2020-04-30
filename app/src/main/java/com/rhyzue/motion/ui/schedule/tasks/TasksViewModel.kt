@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.rhyzue.motion.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class TasksViewModel(application: Application) : AndroidViewModel(application){
     private val taskRepo: TaskRepository
     private val typeRepo: TypeRepository
+
 
     val allTasks: LiveData<List<Task>>
     val allTypes: LiveData<List<Type>>
@@ -35,6 +37,5 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         val pr = typeRepo.insert(type)
         println(pr)
     }
-
 
 }
