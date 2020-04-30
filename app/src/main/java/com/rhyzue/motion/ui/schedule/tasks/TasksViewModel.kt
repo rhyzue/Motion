@@ -5,21 +5,26 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rhyzue.motion.data.AppDatabase
-import com.rhyzue.motion.data.Task
-import com.rhyzue.motion.data.TaskRepository
+import com.rhyzue.motion.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TasksViewModel(application: Application) : AndroidViewModel(application){
-    private val repository: TaskRepository
+    private val taskRepo: TaskRepository
+    private val typeRepo: TypeRepository
 
-    public val allTasks: LiveData<List<Task>>
+    val allTasks: LiveData<List<Task>>
+    val allTypes: LiveData<List<Type>>
 
     init {
         val taskDao = AppDatabase.getDatabase(application, viewModelScope).taskDao()
-        repository = TaskRepository(taskDao)
-        allTasks = repository.allTasks
+        val typeDao = AppDatabase.getDatabase(application, viewModelScope).typeDao()
+
+        taskRepo = TaskRepository(taskDao)
+        typeRepo = TypeRepository(typeDao)
+
+        allTasks = taskRepo.allTasks
+        allTypes = typeRepo.allTypes
     }
 
 }

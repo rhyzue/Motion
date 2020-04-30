@@ -1,5 +1,6 @@
 package com.rhyzue.motion.ui.schedule.tasks
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -12,13 +13,24 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
+import com.rhyzue.motion.data.Type
+import androidx.lifecycle.Observer
 import java.util.*
 
 class AddTaskFragment : DialogFragment(){
 
+    private var types = emptyList<Type>()
+    private lateinit var viewModel: TasksViewModel
+    private lateinit var types_adapter: ArrayAdapter<String>
+    private lateinit var fragment: DialogFragment
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
+        fragment = this
 
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -45,20 +57,6 @@ class AddTaskFragment : DialogFragment(){
         val editText: EditText = dialog.findViewById(R.id.task_name_editText)
         editText.setOnFocusChangeListener{v, hasFocus -> if(!hasFocus){hideSoftKeyboard(v)}}
 
-        //create types spinner
-        val types_spinner: Spinner = dialog.findViewById(R.id.types_spinner)
-        context?.let {
-            ArrayAdapter.createFromResource(
-                it,
-                R.array.types_array,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                types_spinner.adapter = adapter
-            }
-        }
-        types_spinner.setSelection(0)
-
         //create goals spinner
         val goals_spinner: Spinner = dialog.findViewById(R.id.goals_spinner)
         context?.let {
@@ -71,6 +69,25 @@ class AddTaskFragment : DialogFragment(){
                 goals_spinner.adapter = adapter
             }
         }
+        goals_spinner.setSelection(0)
+
+        //create goals spinner
+        val types_spinner: Spinner = dialog.findViewById(R.id.types_spinner)
+        context?.let {
+            types_adapter = ArrayAdapter(it,android.R.layout.simple_spinner_item,types.map{t-> t.name })
+                .also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                types_spinner.adapter = adapter
+            }
+        }
+
+        viewModel.allTypes.observe(fragment, Observer { t ->
+            t?.let {
+                types = t
+                types_adapter.clear()
+                types_adapter.addAll(t.map{x->x.name})
+            }
+        })
         types_spinner.setSelection(0)
     }
 

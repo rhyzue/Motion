@@ -35,7 +35,6 @@ class TasksFragment : Fragment() {
 
             viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
             viewModel.allTasks.observe(viewLifecycleOwner, Observer { tasks ->
-                // Update the cached copy of the words in the adapter.
                 tasks?.let { adapter.setTasks(it) }
             })
         }
