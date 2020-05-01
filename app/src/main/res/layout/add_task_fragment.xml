@@ -9,10 +9,9 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#FFB41F"
+        android:background="@color/complement3"
         android:padding="10dp"
         android:text="Add New Task"
-        android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:gravity="center_horizontal" />
 

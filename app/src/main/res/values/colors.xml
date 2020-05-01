@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--colors: http://paletton.com/#uid=74P0u0kqFvggzGVlJzpuVqPxCl6 -->
+
     <color name="colorPrimary">#8A1FA4</color> <!--purple-->
     <color name="colorPrimaryDark">#73098D</color> <!--darker purple-->
     <color name="colorAccent">#E1F429</color> <!--yellow-->
@@ -31,4 +33,5 @@
     <color name="complement3">#E1F429</color>
     <color name="complement4">#BED207</color>
     <color name="complement5">#95A500</color>
+
 </resources>
