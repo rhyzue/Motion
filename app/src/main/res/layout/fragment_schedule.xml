@@ -45,39 +45,39 @@
                 android:text="Day" />
 
         </RadioGroup>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/scheduleWidgetContainer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/secondary1"
-        android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_type_selector_container">
-
-        <Button
+        <ImageButton
             android:id="@+id/calendar_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Calendar" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="#FFFFFF"
+            android:padding="4dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_calendar_view_day_24px" />
 
-        <Button
+        <ImageButton
             android:id="@+id/unfinishedTasks_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Unfinished Tasks" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_incomplete"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="#FFFFFF"
+            android:padding="4dp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/finishedTasks_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Finished Tasks" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_complete"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="#FFFFFF"
+            android:padding="4dp"/>
     </LinearLayout>
 
     <FrameLayout
@@ -88,7 +88,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scheduleWidgetContainer"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_type_selector_container"
         app:layout_constraintVertical_bias="0.2"/>
 
 
