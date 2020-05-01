@@ -93,9 +93,18 @@
             <FrameLayout
                 android:id="@+id/tasks_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:layout_marginTop="10dp"
                 android:background="#FFFFFF" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_add_24px"
+                android:layout_marginEnd="10dp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
