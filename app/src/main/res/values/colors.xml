@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#8A1FA4</color> <!--purple-->
+    <color name="colorPrimaryDark">#73098D</color> <!--darker purple-->
+    <color name="colorAccent">#E1F429</color> <!--yellow-->
+
+    <!--purple-->
+    <color name="primary1">#B564C9</color>
+    <color name="primary2">#9A3DB1</color>
+    <color name="primary3">#8A1FA4</color>
+    <color name="primary4">#73098D</color>
+    <color name="primary5">#5A036F</color>
+
+    <!--pink-->
+    <color name="secondary1">#E770A2</color>
+    <color name="secondary2">#DD4786</color>
+    <color name="secondary3">#D4236E</color>
+    <color name="secondary4">#B60650</color>
+    <color name="secondary5">#8F003C</color>
+
+    <!--green-->
+    <color name="tertiary1">#BBF174</color>
+    <color name="tertiary2">#A6EB4B</color>
+    <color name="tertiary3">#91E326</color>
+    <color name="tertiary4">#71C307</color>
+    <color name="tertiary5">#579A00</color>
+
+    <!--green-->
+    <color name="complement1">#EFFC7A</color>
+    <color name="complement2">#EAFB50</color>
+    <color name="complement3">#E1F429</color>
+    <color name="complement4">#BED207</color>
+    <color name="complement5">#95A500</color>
 </resources>

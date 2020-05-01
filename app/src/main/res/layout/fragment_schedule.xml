@@ -7,15 +7,50 @@
     android:background="#FFFFFF"
     tools:context=".ui.schedule.ScheduleFragment">
 
+    <RadioGroup
+        android:id="@+id/schedule_type_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/radiogroup_border"
+        android:checkedButton="@+id/radio_month"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.1">
+
+        <RadioButton
+            android:id="@+id/radio_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month" />
+
+        <RadioButton
+            android:id="@+id/radio_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Week" />
+
+        <RadioButton
+            android:id="@+id/radio_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Day" />
+
+    </RadioGroup>
+
     <LinearLayout
         android:id="@+id/scheduleWidgetContainer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="#FFC107"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/calendar_container"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_type_selector">
 
@@ -45,44 +80,12 @@
         android:id="@+id/calendar_container"
         android:layout_width="350dp"
         android:layout_height="450dp"
-        android:layout_marginBottom="8dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/schedule_type_selector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/radiogroup_border"
-        android:checkedButton="@+id/radio_month"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/radio_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Month" />
-
-        <RadioButton
-            android:id="@+id/radio_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Week" />
-
-        <RadioButton
-            android:id="@+id/radio_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Day" />
-
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/scheduleWidgetContainer"
+        app:layout_constraintVertical_bias="0.2"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
