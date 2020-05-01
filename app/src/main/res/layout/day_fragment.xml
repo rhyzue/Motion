@@ -30,29 +30,39 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
+                <ImageButton
                     android:id="@+id/btn_prev_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    android:padding="1dp"
                     android:layout_weight="0.5"
-                    android:text="Prev" />
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/previous_colored"/>
 
                 <TextView
                     android:id="@+id/date_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:fontFamily="sans-serif-medium"
                     android:gravity="center_horizontal"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/btn_next_day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
                     android:layout_weight="0.5"
-                    android:text="Next" />
+                    android:layout_marginLeft="10dp"
+                    android:padding="1dp"
+                    android:src="@drawable/next_colored"/>
             </LinearLayout>
 
             <LinearLayout

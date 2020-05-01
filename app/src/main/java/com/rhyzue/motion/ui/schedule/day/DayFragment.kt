@@ -27,6 +27,7 @@ class DayFragment : Fragment() {
     private lateinit var viewModel: DayViewModel
     private lateinit var day: LocalDateTime
     private lateinit var dateTextView: TextView
+    private val df: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -69,7 +70,7 @@ class DayFragment : Fragment() {
         if(option=="next"){
             day =  day.plusDays(1)
         }
-        dateTextView.text = day.toString()
+        dateTextView.text = day.format(df)
     }
 
 }
