@@ -88,14 +88,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.8"
             android:text="No Deadline " />
 
-        <Button
+        <ImageButton
             android:id="@+id/select_deadline_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_create_24px"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
     </LinearLayout>
 
 
@@ -108,13 +116,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.8"
             android:text="Complete " />
 
         <CheckBox
             android:id="@+id/complete_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp" />
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
     </LinearLayout>
 
 
