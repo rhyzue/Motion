@@ -84,13 +84,13 @@
         android:id="@+id/calendar_container"
         android:layout_width="350dp"
         android:layout_height="550dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_type_selector_container"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

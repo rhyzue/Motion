@@ -11,36 +11,40 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="350dp"
+            android:layout_height="550dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/btn_prev_day"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
                     android:padding="1dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/previous_colored"/>
+                    android:src="@drawable/previous_colored"
+                    android:layout_marginEnd="10dp" />
 
                 <TextView
                     android:id="@+id/date_textView"
@@ -48,57 +52,37 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:fontFamily="sans-serif-medium"
-                    android:gravity="center_horizontal"
-                    android:text="TextView"
+                    android:gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
                 <ImageButton
                     android:id="@+id/btn_next_day"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.3"
                     android:layout_marginLeft="10dp"
                     android:padding="1dp"
-                    android:src="@drawable/next_colored"/>
+                    android:src="@drawable/next_colored"
+                    android:layout_marginStart="10dp" />
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:layout_height="1.5dp"
+                android:background="@color/secondary4" />
 
-                <Button
-                    android:id="@+id/add_task_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add" />
-
-                <Button
-                    android:id="@+id/edit_task_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit" />
-
-                <Button
-                    android:id="@+id/remove_task_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Remove" />
-
-            </LinearLayout>
             <FrameLayout
                 android:id="@+id/tasks_container"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="10dp"
                 android:background="#FFFFFF" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton2"
+                android:id="@+id/add_task_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"

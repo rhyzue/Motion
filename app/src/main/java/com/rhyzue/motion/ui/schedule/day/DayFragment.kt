@@ -27,7 +27,8 @@ class DayFragment : Fragment() {
     private lateinit var viewModel: DayViewModel
     private lateinit var day: LocalDateTime
     private lateinit var dateTextView: TextView
-    private val df: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private val df: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -41,8 +42,7 @@ class DayFragment : Fragment() {
         view.btn_prev_day.setOnClickListener{onSwitchDay("prev")}
         view.btn_next_day.setOnClickListener{onSwitchDay("next")}
         dateTextView = view.findViewById(R.id.date_textView)
-        var format = DateTimeFormatter.ofPattern("dd MMM uuuu")
-        dateTextView.text=day.format(format)
+        dateTextView.text=day.format(df)
 
 
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
