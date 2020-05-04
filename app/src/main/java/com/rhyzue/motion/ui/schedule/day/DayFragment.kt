@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.day_fragment.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 class DayFragment : Fragment() {
 
     companion object {
@@ -27,10 +28,9 @@ class DayFragment : Fragment() {
     private lateinit var viewModel: DayViewModel
     private lateinit var day: LocalDateTime
     private lateinit var dateTextView: TextView
-    @RequiresApi(Build.VERSION_CODES.O)
     private val df: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy")
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +62,7 @@ class DayFragment : Fragment() {
         dialog.show(childFragmentManager, "addTask")
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     private fun onSwitchDay(option: String){
         if(option=="prev"){
            day =  day.minusDays(1)

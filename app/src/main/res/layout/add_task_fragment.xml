@@ -86,6 +86,7 @@
         android:padding="15dp">
 
         <TextView
+            android:id="@+id/deadline_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -103,7 +104,8 @@
             android:layout_weight="0.2"
             android:background="@android:color/transparent"
             android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp" />
+            android:layout_marginStart="10dp"
+            android:contentDescription="Select Deadline" />
     </LinearLayout>
 
 

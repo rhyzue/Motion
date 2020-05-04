@@ -4,27 +4,41 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
 import com.rhyzue.motion.data.Type
-import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.fragment_date_time_picker.*
+import java.text.SimpleDateFormat
 import java.util.*
 
-class AddTaskDialog : DialogFragment(){
+class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListener{
 
+    private val dateTimePicker = DateTimePickerDialog()
     private var types = emptyList<Type>()
     private var deadline: Date? = null
     private lateinit var viewModel: TasksViewModel
-    private lateinit var types_adapter: ArrayAdapter<String>
+    private lateinit var typesAdapter: ArrayAdapter<String>
     private lateinit var fragment: DialogFragment
+    private lateinit var deadlineTextView: TextView
+    private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy HH:mm")
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onDateTimeDialogPositiveClick(dialog: DialogFragment){
+        deadline = dateTimePicker.ddate
+        setDeadline()
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
         fragment = this
 
@@ -54,7 +68,7 @@ class AddTaskDialog : DialogFragment(){
         editText.setOnFocusChangeListener{v, hasFocus -> if(!hasFocus){hideSoftKeyboard(v)}}
 
         //create goals spinner
-        val goals_spinner: Spinner = dialog.findViewById(R.id.goals_spinner)
+        val goalsSpinner: Spinner = dialog.findViewById(R.id.goals_spinner)
         context?.let {
             ArrayAdapter.createFromResource(
                 it,
@@ -62,34 +76,38 @@ class AddTaskDialog : DialogFragment(){
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                goals_spinner.adapter = adapter
+                goalsSpinner.adapter = adapter
             }
         }
-        goals_spinner.setSelection(0)
+        goalsSpinner.setSelection(0)
 
         //create goals spinner
-        val types_spinner: Spinner = dialog.findViewById(R.id.types_spinner)
+        val typesSpinner: Spinner = dialog.findViewById(R.id.types_spinner)
         context?.let {
-            types_adapter = ArrayAdapter(it,android.R.layout.simple_spinner_item,types.map{t-> t.name })
+            typesAdapter = ArrayAdapter(it,android.R.layout.simple_spinner_item,types.map{t-> t.name })
                 .also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                types_spinner.adapter = adapter
+                typesSpinner.adapter = adapter
             }
         }
 
         viewModel.allTypes.observe(fragment, Observer { t ->
             t?.let {
                 types = t
-                types_adapter.clear()
-                types_adapter.addAll(t.map{x->x.name})
+                typesAdapter.clear()
+                typesAdapter.addAll(t.map{x->x.name})
             }
         })
-        types_spinner.setSelection(0)
+        typesSpinner.setSelection(0)
 
-        dialog.findViewById<Button>(R.id.select_deadline_btn).setOnClickListener { showDatePicker() }
+        dialog.findViewById<ImageButton>(R.id.select_deadline_btn).setOnClickListener { showDatePicker() }
+
+        deadlineTextView = dialog.findViewById(R.id.deadline_textView)
     }
 
+
     private fun onSubmit(){
+
         val dialog = requireDialog()
 
         val name: String = dialog.findViewById<EditText>(R.id.task_name_editText).text.toString()
@@ -101,7 +119,8 @@ class AddTaskDialog : DialogFragment(){
 
         //val task = type_pkey?.let { Task(name=name,type = 0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline) }
 
-        val task = Task(name=name,type = 0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline)
+
+        val task = Task(name=name,type = 0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=null)
 
         if (task != null) {
             viewModel.insertTask(task)
@@ -109,12 +128,19 @@ class AddTaskDialog : DialogFragment(){
     }
 
     private fun showDatePicker(){
-        val dateTimePicker = DateTimePickerDialog()
-        dateTimePicker.show(childFragmentManager, "dateTimePicker")
+        dateTimePicker.setTargetFragment(this,0)
+        fragmentManager?.let { dateTimePicker.show(it, "dateTimePicker") }
+
     }
 
-    fun setDeadline(date: Date?){
-        deadline = date
+    private fun setDeadline(){
+
+        if (deadline != null) {
+            deadlineTextView.text="Deadline: "+df.format(deadline)
+        }
+        else{
+            deadlineTextView.text="No Deadline"
+        }
     }
 
     private fun hideSoftKeyboard(view: View){

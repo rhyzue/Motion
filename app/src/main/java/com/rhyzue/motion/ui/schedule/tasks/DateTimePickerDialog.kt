@@ -2,6 +2,7 @@ package com.rhyzue.motion.ui.schedule.tasks
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
@@ -10,11 +11,31 @@ import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.rhyzue.motion.R
+import kotlinx.android.synthetic.main.fragment_date_time_picker.*
 import java.util.*
 
 
-class DateTimePickerDialog : DialogFragment() {
-    private var addTaskDialog = AddTaskDialog()
+class DateTimePickerDialog() : DialogFragment() {
+   lateinit var listener: DateTimeDialogListener
+    var ddate: Date? = null
+
+    interface DateTimeDialogListener {
+        fun onDateTimeDialogPositiveClick(dialog: DialogFragment)
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // Verify that the host activity implements the callback interface
+        try {
+            // Instantiate the NoticeDialogListener so we can send events to the host
+            listener = targetFragment as DateTimeDialogListener
+        } catch (e: ClassCastException) {
+            // The activity doesn't implement the interface, throw exception
+            throw ClassCastException((context.toString() +
+                    " must implement DateTimeDialogListener"))
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -27,11 +48,9 @@ class DateTimePickerDialog : DialogFragment() {
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, _ ->
                         onOk()
-                        dialog.cancel()
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, _ ->
-                        addTaskDialog.setDeadline(null)
                         dialog.cancel()
                     })
             builder.create()
@@ -40,9 +59,9 @@ class DateTimePickerDialog : DialogFragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun onOk(){
-        val dialogView = requireDialog()
-        val datePicker = dialogView.findViewById<DatePicker>(R.id.date_picker)
-        val timePicker = dialogView.findViewById<TimePicker>(R.id.time_picker)
+        val dialog = requireDialog()
+        val datePicker = dialog.date_picker
+        val timePicker = dialog.time_picker
 
         val date: Calendar = GregorianCalendar(
             datePicker.year,
@@ -52,6 +71,8 @@ class DateTimePickerDialog : DialogFragment() {
             timePicker.minute
         )
 
-        addTaskDialog.setDeadline(date.time)
+        ddate = date.time
+        listener.onDateTimeDialogPositiveClick(this)
     }
+
 }
