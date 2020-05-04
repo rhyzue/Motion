@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
 import com.rhyzue.motion.data.Type
-import kotlinx.android.synthetic.main.fragment_date_time_picker.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,7 +28,7 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
     private lateinit var typesAdapter: ArrayAdapter<String>
     private lateinit var fragment: DialogFragment
     private lateinit var deadlineTextView: TextView
-    private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy HH:mm")
+    private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy hh:mm aa")
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onDateTimeDialogPositiveClick(dialog: DialogFragment){
@@ -129,7 +128,7 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
 
     private fun showDatePicker(){
         dateTimePicker.setTargetFragment(this,0)
-        fragmentManager?.let { dateTimePicker.show(it, "dateTimePicker") }
+        parentFragmentManager?.let { dateTimePicker.show(it, "dateTimePicker") }
 
     }
 
