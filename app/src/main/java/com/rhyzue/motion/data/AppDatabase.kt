@@ -33,37 +33,24 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "motion_database.db"
                 ).fallbackToDestructiveMigration()
-                    .addCallback(AppDatabaseCallback(scope))
+                    .addCallback(CALLBACK)
                     .build()
                 INSTANCE = instance
                 return instance
             }
         }
-    }
 
-    private class AppDatabaseCallback(
-        private val scope: CoroutineScope
-    ) : RoomDatabase.Callback() {
+        private val CALLBACK = object : RoomDatabase.Callback() {
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
 
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
-            println("OPEN CALLBACK")
-            INSTANCE?.let { database ->
-                scope.launch (Dispatchers.IO){
-                    populateDatabase(database.taskDao(), database.typeDao())
+                INSTANCE?.let { database ->
+                    db.execSQL("DELETE FROM task")
+                    db.execSQL("INSERT INTO type (name,description,color) VALUES ('None',null,'#FFFFFF')")
                 }
             }
         }
-
-        suspend fun populateDatabase(taskDao: TaskDao, typeDao: TypeDao) {
-            val type = Type(id=0,name="None", description="None", color="#ffffff")
-            var task = Task(name="beginInsertTest", type=0, date_assigned = Date(),complete=false, deadline=null, goal_id=0)
-            val pr = taskDao.insert(task)
-            val pr2 = typeDao.insert(type)
-            println("ADDED TYPES")
-            println(pr)
-            println(pr2)
-        }
     }
+
 }
 
