@@ -41,8 +41,8 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private val CALLBACK = object : RoomDatabase.Callback() {
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
 
                 INSTANCE?.let { database ->
                     db.execSQL("DELETE FROM task")

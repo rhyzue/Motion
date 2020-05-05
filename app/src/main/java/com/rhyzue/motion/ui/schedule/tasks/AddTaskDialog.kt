@@ -29,6 +29,7 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
     private lateinit var fragment: DialogFragment
     private lateinit var deadlineTextView: TextView
     private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy hh:mm aa")
+    private var dateAssigned: Date? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onDateTimeDialogPositiveClick(dialog: DialogFragment){
@@ -41,9 +42,12 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
         viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
         fragment = this
 
-        return activity?.let {
+        return activity?.let { it ->
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater;
+            arguments?.let{ x ->
+                dateAssigned = x.getSerializable("DATE_ASSIGNED") as Date?
+            }
             builder.setView(inflater.inflate(R.layout.add_task_fragment, null))
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, _ ->
@@ -55,6 +59,7 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
                         dialog.cancel()
                     })
             builder.create()
+
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
@@ -110,20 +115,17 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
         val dialog = requireDialog()
 
         val name: String = dialog.findViewById<EditText>(R.id.task_name_editText).text.toString()
-        //val type_name: String = dialog.findViewById<Spinner>(R.id.types_spinner).selectedItem.toString()
+        val typeName: String = dialog.findViewById<Spinner>(R.id.types_spinner).selectedItem.toString()
 
         val complete: Boolean = dialog.findViewById<CheckBox>(R.id.complete_checkbox).isChecked
 
-        //val type_pkey = types.find{ x -> x.name==type_name}?.id
+        val typePkey = types.find{ x -> x.name==typeName}?.id
 
-        //val task = type_pkey?.let { Task(name=name,type = 0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=deadline) }
-
-
-        val task = Task(name=name,type = 0,goal_id = 0,date_assigned = Date(),complete=complete,deadline=null)
-
-        if (task != null) {
+        if(dateAssigned!=null && typePkey!=null){
+            val task = Task(name=name,type = typePkey,goal_id = 0,date_assigned = dateAssigned!!,complete=complete,deadline=deadline)
             viewModel.insertTask(task)
         }
+
     }
 
     private fun showDatePicker(){
