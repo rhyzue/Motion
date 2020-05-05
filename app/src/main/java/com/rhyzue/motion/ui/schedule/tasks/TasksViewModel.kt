@@ -38,4 +38,12 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         println(pr)
     }
 
+    fun getTaskById(id: Int): Task{
+        return taskRepo.getTaskById(id)
+    }
+
+    fun modifyTask(task: Task){
+        taskRepo.modifyTask(task)
+    }
+
 }

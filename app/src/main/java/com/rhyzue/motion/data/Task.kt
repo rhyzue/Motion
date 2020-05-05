@@ -2,7 +2,6 @@ package com.rhyzue.motion.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import java.time.LocalDateTime
 import java.util.*
 
 @Entity(tableName = "task")
@@ -22,6 +21,9 @@ interface TaskDao{
     @Query("SELECT * FROM task")
     fun getAllTasks(): LiveData<List<Task>>
 
+    @Query("SELECT * FROM task WHERE id = (:id)")
+    fun getTaskById(id: Int): Task
+
     @Query("SELECT * FROM task WHERE date_assigned = (:date)")
     fun getTaskByDate(date: Date): LiveData<List<Task>>
 
@@ -30,6 +32,9 @@ interface TaskDao{
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(task: Task):Long
+
+    @Update(onConflict = OnConflictStrategy.ABORT)
+    fun modifyTask(task: Task):Long
 
     @Query("DELETE FROM task")
     fun deleteAll()
@@ -52,12 +57,20 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.getTaskByCompletion(complete)
     }
 
+    fun getTaskById(id: Int): Task{
+        return taskDao.getTaskById(id)
+    }
+
     fun deleteAll(){
         taskDao.deleteAll()
     }
 
     fun insert(task: Task){
         taskDao.insert(task)
+    }
+
+    fun modifyTask(task: Task){
+        taskDao.modifyTask(task)
     }
 
 }
