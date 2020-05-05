@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -31,8 +32,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "motion_database.db"
-                ).addCallback(AppDatabaseCallback(scope))
-                    .fallbackToDestructiveMigration()
+                ).fallbackToDestructiveMigration()
+                    .addCallback(AppDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 return instance
@@ -46,14 +47,15 @@ abstract class AppDatabase : RoomDatabase() {
 
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
+            println("OPEN CALLBACK")
             INSTANCE?.let { database ->
-                scope.launch {
+                scope.launch (Dispatchers.IO){
                     populateDatabase(database.taskDao(), database.typeDao())
                 }
             }
         }
 
-        fun populateDatabase(taskDao: TaskDao, typeDao: TypeDao) {
+        suspend fun populateDatabase(taskDao: TaskDao, typeDao: TypeDao) {
             val type = Type(id=0,name="None", description="None", color="#ffffff")
             var task = Task(name="beginInsertTest", type=0, date_assigned = Date(),complete=false, deadline=null, goal_id=0)
             val pr = taskDao.insert(task)

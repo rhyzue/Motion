@@ -29,7 +29,7 @@ interface TaskDao{
     fun getTaskByCompletion(complete: Boolean): LiveData<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(task: Task):Long
+    suspend fun insert(task: Task):Long
 
     @Query("DELETE FROM task")
     fun deleteAll()
@@ -52,7 +52,7 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.getTaskByCompletion(complete)
     }
 
-    fun insert(task: Task){
+    suspend fun insert(task: Task){
         taskDao.insert(task)
     }
 
