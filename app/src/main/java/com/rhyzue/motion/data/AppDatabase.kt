@@ -22,7 +22,6 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
-            println("GET DATABASE")
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -44,7 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
 
-                INSTANCE?.let { database ->
+                INSTANCE?.let { _ ->
                     db.execSQL("DELETE FROM task")
                     db.execSQL("INSERT INTO type (name,description,color) VALUES ('None',null,'#FFFFFF')")
                 }

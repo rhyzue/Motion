@@ -1,23 +1,28 @@
 package com.rhyzue.motion.ui.schedule.tasks
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
 
 class TaskListAdapter internal constructor(
-    context: Context
+    context: Context,
+    fragment: TasksFragment
 ) : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var tasks = emptyList<Task>()
+    private val fg = fragment
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val taskItemView: TextView = itemView.findViewById(R.id.task_text)
+        val viewTaskBtn: ImageButton = itemView.findViewById(R.id.edit_task_btn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -28,6 +33,7 @@ class TaskListAdapter internal constructor(
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val current = tasks[position]
         holder.taskItemView.text = current.name
+        holder.viewTaskBtn.setOnClickListener { fg.onViewTask(current.id) }
     }
 
     internal fun setTasks(tasks: List<Task>) {

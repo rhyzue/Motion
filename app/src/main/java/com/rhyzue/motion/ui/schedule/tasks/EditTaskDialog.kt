@@ -50,7 +50,7 @@ class EditTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogList
             val inflater = requireActivity().layoutInflater;
             arguments?.let{ x ->
                 taskId = x.getInt("TASK_ID")
-                task = viewModel.getTaskById(taskId!!)
+                task = viewModel.getTaskById(taskId!!)!!
             }
             builder.setView(inflater.inflate(R.layout.add_task_fragment, null))
                 .setPositiveButton("Ok",

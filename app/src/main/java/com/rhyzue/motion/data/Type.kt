@@ -18,7 +18,7 @@ interface TypeDao{
     fun getAllTypes(): LiveData<List<Type>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(type: Type):Long
+    fun insert(type: Type)
 
     @Query("DELETE FROM type")
     fun deleteAll()

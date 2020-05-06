@@ -21,8 +21,8 @@ interface TaskDao{
     @Query("SELECT * FROM task")
     fun getAllTasks(): LiveData<List<Task>>
 
-    @Query("SELECT * FROM task WHERE id = (:id)")
-    fun getTaskById(id: Int): Task
+    @Query("SELECT * FROM task WHERE id = :id")
+    suspend fun getTaskById(id: Int): Task
 
     @Query("SELECT * FROM task WHERE date_assigned = (:date)")
     fun getTaskByDate(date: Date): LiveData<List<Task>>
@@ -31,10 +31,10 @@ interface TaskDao{
     fun getTaskByCompletion(complete: Boolean): LiveData<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(task: Task):Long
+    fun insert(task: Task)
 
     @Update(onConflict = OnConflictStrategy.ABORT)
-    fun modifyTask(task: Task):Long
+    fun modifyTask(task: Task)
 
     @Query("DELETE FROM task")
     fun deleteAll()
@@ -57,7 +57,7 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.getTaskByCompletion(complete)
     }
 
-    fun getTaskById(id: Int): Task{
+    suspend fun getTaskById(id: Int): Task{
         return taskDao.getTaskById(id)
     }
 

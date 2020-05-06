@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.rhyzue.motion.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class TasksViewModel(application: Application) : AndroidViewModel(application){
@@ -38,11 +39,20 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         println(pr)
     }
 
-    fun getTaskById(id: Int): Task{
-        return taskRepo.getTaskById(id)
+    fun getTaskById(id: Int): Task? {
+        var t: Task? = null
+        runBlocking {
+            viewModelScope.launch(Dispatchers.IO){
+                println("LAUNCH")
+                t = taskRepo.getTaskById(id)
+            }
+        }
+        println(t?.name)
+
+        return t
     }
 
-    fun modifyTask(task: Task){
+    fun modifyTask(task: Task)= viewModelScope.launch(Dispatchers.IO) {
         taskRepo.modifyTask(task)
     }
 

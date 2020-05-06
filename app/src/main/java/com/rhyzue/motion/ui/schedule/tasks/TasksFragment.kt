@@ -28,8 +28,7 @@ class TasksFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recycler)
         val contx = context
         if(contx!=null) {
-            println("CONTEXT NOT NULL")
-            val adapter = TaskListAdapter(contx)
+            val adapter = TaskListAdapter(contx, this)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(contx)
 
@@ -38,12 +37,20 @@ class TasksFragment : Fragment() {
                 tasks?.let { adapter.setTasks(it) }
             })
         }
-        else{
-            println("CONTEXT NULL")
-        }
 
         return view
     }
 
+    fun onViewTask(id: Int){
+        val dialog = EditTaskDialog()
+        val bundle: Bundle = Bundle()
+
+        bundle.putInt("TASK_ID", id)
+        dialog.arguments = bundle
+
+        val task = viewModel.getTaskById(1) //TODO: REMOVE LATER
+
+        dialog.show(childFragmentManager, "addTask")
+    }
 
 }
