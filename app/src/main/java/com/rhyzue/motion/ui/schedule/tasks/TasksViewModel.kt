@@ -39,17 +39,10 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         println(pr)
     }
 
-    fun getTaskById(id: Int): Task? {
-        var t: Task? = null
-        runBlocking {
-            viewModelScope.launch(Dispatchers.IO){
-                println("LAUNCH")
-                t = taskRepo.getTaskById(id)
-            }
+    fun getTaskById(id: Int): Task {
+        return runBlocking{
+            taskRepo.getTaskById(id)
         }
-        println(t?.name)
-
-        return t
     }
 
     fun modifyTask(task: Task)= viewModelScope.launch(Dispatchers.IO) {

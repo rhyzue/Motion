@@ -48,8 +48,6 @@ class TasksFragment : Fragment() {
         bundle.putInt("TASK_ID", id)
         dialog.arguments = bundle
 
-        val task = viewModel.getTaskById(1) //TODO: REMOVE LATER
-
         dialog.show(childFragmentManager, "addTask")
     }
 
