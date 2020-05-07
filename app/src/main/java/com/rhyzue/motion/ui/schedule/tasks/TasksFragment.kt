@@ -51,4 +51,8 @@ class TasksFragment : Fragment() {
         dialog.show(childFragmentManager, "addTask")
     }
 
+    fun onRemoveTask(id: Int){
+        viewModel.removeTask(id)
+    }
+
 }

@@ -18,11 +18,12 @@ class TaskListAdapter internal constructor(
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var tasks = emptyList<Task>()
-    private val fg = fragment
+    private val parent = fragment
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val taskItemView: TextView = itemView.findViewById(R.id.task_text)
         val viewTaskBtn: ImageButton = itemView.findViewById(R.id.edit_task_btn)
+        val removeTaskBtn: ImageButton = itemView.findViewById(R.id.remove_task_btn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -33,7 +34,8 @@ class TaskListAdapter internal constructor(
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val current = tasks[position]
         holder.taskItemView.text = current.name
-        holder.viewTaskBtn.setOnClickListener { fg.onViewTask(current.id) }
+        holder.viewTaskBtn.setOnClickListener { parent.onViewTask(current.id) }
+        holder.removeTaskBtn.setOnClickListener { parent.onRemoveTask(current.id) }
     }
 
     internal fun setTasks(tasks: List<Task>) {

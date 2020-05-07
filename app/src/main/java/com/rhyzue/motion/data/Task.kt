@@ -34,7 +34,10 @@ interface TaskDao{
     fun insert(task: Task)
 
     @Update(onConflict = OnConflictStrategy.ABORT)
-    fun modifyTask(task: Task)
+    suspend fun modifyTask(task: Task)
+
+    @Query("DELETE FROM task WHERE id = :id")
+    suspend fun removeTask(id: Int)
 
     @Query("DELETE FROM task")
     fun deleteAll()
@@ -69,8 +72,12 @@ class TaskRepository(private val taskDao: TaskDao) {
         taskDao.insert(task)
     }
 
-    fun modifyTask(task: Task){
+    suspend fun modifyTask(task: Task){
         taskDao.modifyTask(task)
+    }
+
+    suspend fun removeTask(id: Int){
+        taskDao.removeTask(id)
     }
 
 }

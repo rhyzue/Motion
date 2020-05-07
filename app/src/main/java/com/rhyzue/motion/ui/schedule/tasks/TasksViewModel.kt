@@ -49,4 +49,8 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         taskRepo.modifyTask(task)
     }
 
+    fun removeTask(id: Int)= viewModelScope.launch(Dispatchers.IO) {
+        taskRepo.removeTask(id)
+    }
+
 }
