@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,13 +13,21 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.rhyzue.motion.R
 
-class TasksFragment : Fragment() {
+class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
 
     companion object {
         fun newInstance() = TasksFragment()
     }
 
     private lateinit var viewModel: TasksViewModel
+
+    override fun onConfirmDialogPositiveClick(dialog: DialogFragment, option: String, taskId: Int){
+        when(option){
+            "DELETE" -> viewModel.removeTask(taskId)
+            "COMPLETE" -> println("temp")
+            "INCOMPLETE" -> println("temp")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +52,7 @@ class TasksFragment : Fragment() {
 
     fun onViewTask(id: Int){
         val dialog = EditTaskDialog()
-        val bundle: Bundle = Bundle()
+        val bundle = Bundle()
 
         bundle.putInt("TASK_ID", id)
         dialog.arguments = bundle
@@ -52,7 +61,15 @@ class TasksFragment : Fragment() {
     }
 
     fun onRemoveTask(id: Int){
-        viewModel.removeTask(id)
+        val dialog = ConfirmDialog()
+        val bundle = Bundle()
+        bundle.putString("CONFIRM_MESSAGE", "Delete Task?")
+        bundle.putString("OPTION", "DELETE")
+        bundle.putInt("TASK_ID", id)
+        dialog.arguments = bundle
+        dialog.setTargetFragment(this,0)
+
+        dialog.show(parentFragmentManager, "confirmDelete")
     }
 
 }
