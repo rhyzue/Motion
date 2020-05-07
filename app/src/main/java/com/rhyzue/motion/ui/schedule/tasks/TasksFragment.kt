@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.rhyzue.motion.R
+import com.rhyzue.motion.data.Task
 
 class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
 
@@ -22,10 +23,20 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
     private lateinit var viewModel: TasksViewModel
 
     override fun onConfirmDialogPositiveClick(dialog: DialogFragment, option: String, taskId: Int){
+        var task = viewModel.getTaskById(taskId)
         when(option){
             "DELETE" -> viewModel.removeTask(taskId)
-            "COMPLETE" -> println("temp")
-            "INCOMPLETE" -> println("temp")
+            "COMPLETE","INCOMPLETE" -> {
+                val newTask = Task(id=task.id,
+                    name=task.name,
+                    type=task.type,
+                    date_assigned = task.date_assigned,
+                    complete=!task.complete,
+                    deadline = task.deadline,
+                    goal_id = task.goal_id
+                )
+                viewModel.modifyTask(newTask)
+            }
         }
     }
 
@@ -50,7 +61,7 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
         return view
     }
 
-    fun onViewTask(id: Int){
+    fun onEditTask(id: Int){
         val dialog = EditTaskDialog()
         val bundle = Bundle()
 
@@ -70,6 +81,21 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
         dialog.setTargetFragment(this,0)
 
         dialog.show(parentFragmentManager, "confirmDelete")
+    }
+
+    fun onCompleteTask(id: Int){
+        val complete: Boolean = viewModel.getTaskById(id).complete
+
+
+        val dialog = ConfirmDialog()
+        val bundle = Bundle()
+        bundle.putString("CONFIRM_MESSAGE", "Mark task as "+ if(complete) "Incomplete" else "Complete" + "?")
+        bundle.putString("OPTION", "COMPLETE")
+        bundle.putInt("TASK_ID", id)
+        dialog.arguments = bundle
+        dialog.setTargetFragment(this,0)
+
+        dialog.show(parentFragmentManager, "confirmComplete")
     }
 
 }

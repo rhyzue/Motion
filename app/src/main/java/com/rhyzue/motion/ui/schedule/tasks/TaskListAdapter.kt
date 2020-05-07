@@ -1,10 +1,10 @@
 package com.rhyzue.motion.ui.schedule.tasks
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +24,8 @@ class TaskListAdapter internal constructor(
         val taskItemView: TextView = itemView.findViewById(R.id.task_text)
         val viewTaskBtn: ImageButton = itemView.findViewById(R.id.edit_task_btn)
         val removeTaskBtn: ImageButton = itemView.findViewById(R.id.remove_task_btn)
+        val checkBox: CheckBox = itemView.findViewById(R.id.complete_checkbox)
+        val completeIndicator: View  = itemView.findViewById(R.id.complete_indicator)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -34,8 +36,15 @@ class TaskListAdapter internal constructor(
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val current = tasks[position]
         holder.taskItemView.text = current.name
-        holder.viewTaskBtn.setOnClickListener { parent.onViewTask(current.id) }
+        holder.viewTaskBtn.setOnClickListener { parent.onEditTask(current.id) }
         holder.removeTaskBtn.setOnClickListener { parent.onRemoveTask(current.id) }
+        holder.checkBox.setOnClickListener { parent.onCompleteTask(current.id)}
+        holder.checkBox.isChecked  = current.complete
+
+        if (current.complete)
+            holder.completeIndicator.visibility = View.VISIBLE
+        else
+            holder.completeIndicator.visibility = View.GONE
     }
 
     internal fun setTasks(tasks: List<Task>) {
