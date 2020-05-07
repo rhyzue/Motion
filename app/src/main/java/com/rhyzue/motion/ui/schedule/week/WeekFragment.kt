@@ -1,6 +1,5 @@
 package com.rhyzue.motion.ui.schedule.week
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +21,7 @@ class WeekFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.week_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_week, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

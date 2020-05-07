@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.ui.schedule.tasks.AddTaskDialog
 import com.rhyzue.motion.ui.schedule.tasks.TasksFragment
-import kotlinx.android.synthetic.main.day_fragment.view.*
+import kotlinx.android.synthetic.main.fragment_day.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,7 +35,7 @@ class DayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.day_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_day, container, false)
         day = Date()
 
         view.add_task_button.setOnClickListener{onAddTask()}

@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
 import com.rhyzue.motion.data.Type
-import kotlinx.android.synthetic.main.add_task_fragment.*
+import kotlinx.android.synthetic.main.dialog_add_task.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,7 +52,7 @@ class EditTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogList
                 taskId = x.getInt("TASK_ID")
                 task = viewModel.getTaskById(taskId!!)!!
             }
-            builder.setView(inflater.inflate(R.layout.add_task_fragment, null))
+            builder.setView(inflater.inflate(R.layout.dialog_add_task, null))
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, _ ->
                         onSubmit()

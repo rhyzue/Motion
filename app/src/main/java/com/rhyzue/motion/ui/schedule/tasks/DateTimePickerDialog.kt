@@ -6,12 +6,10 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
-import android.widget.DatePicker
-import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.rhyzue.motion.R
-import kotlinx.android.synthetic.main.fragment_date_time_picker.*
+import kotlinx.android.synthetic.main.dialog_date_time_picker.*
 import java.util.*
 
 
@@ -44,7 +42,7 @@ class DateTimePickerDialog() : DialogFragment() {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater;
-            builder.setView(inflater.inflate(R.layout.fragment_date_time_picker,null))
+            builder.setView(inflater.inflate(R.layout.dialog_date_time_picker,null))
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, _ ->
                         onOk()

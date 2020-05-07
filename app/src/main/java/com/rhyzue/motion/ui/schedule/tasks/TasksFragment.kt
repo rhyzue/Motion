@@ -24,7 +24,7 @@ class TasksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.tasks_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_tasks, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recycler)
         val contx = context
         if(contx!=null) {
