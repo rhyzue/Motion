@@ -73,6 +73,8 @@ class EditTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogList
 
         val dialog = requireDialog()
 
+        dialog.title_textView.text = "Edit Task"
+
         val editText: EditText = dialog.findViewById(R.id.task_name_editText)
         editText.setText(task.name)
         editText.setOnFocusChangeListener{v, hasFocus -> if(!hasFocus){hideSoftKeyboard(v)}}

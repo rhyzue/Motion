@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
 import com.rhyzue.motion.data.Type
+import kotlinx.android.synthetic.main.add_task_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -67,6 +68,8 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
         super.onStart()
 
         val dialog = requireDialog()
+
+        dialog.title_textView.text = "Add Task"
 
         val editText: EditText = dialog.findViewById(R.id.task_name_editText)
         editText.setOnFocusChangeListener{v, hasFocus -> if(!hasFocus){hideSoftKeyboard(v)}}
