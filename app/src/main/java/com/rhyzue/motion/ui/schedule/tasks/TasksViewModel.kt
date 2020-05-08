@@ -34,11 +34,6 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         println(pr)
     }
 
-    fun insertType(type: Type) = viewModelScope.launch(Dispatchers.IO) {
-        val pr = typeRepo.insert(type)
-        println(pr)
-    }
-
     fun getTaskById(id: Int): Task {
         return runBlocking{
             taskRepo.getTaskById(id)

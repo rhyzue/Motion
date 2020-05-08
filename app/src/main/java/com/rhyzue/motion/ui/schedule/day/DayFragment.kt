@@ -69,12 +69,12 @@ class DayFragment : Fragment() {
     private fun onSwitchDay(option: String){
         if(option=="prev"){
             c.time = day;
-            c.add(Calendar.DATE, 1)
+            c.add(Calendar.DATE, -1)
             day = c.time
         }
         if(option=="next"){
             c.time = day;
-            c.add(Calendar.DATE, -1)
+            c.add(Calendar.DATE, 1)
             day = c.time
         }
         dateTextView.text = df.format(day)
