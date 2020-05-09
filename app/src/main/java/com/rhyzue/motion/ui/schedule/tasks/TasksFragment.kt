@@ -104,4 +104,8 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
         dialog.show(parentFragmentManager, "confirmComplete")
     }
 
+    fun onSwitchDay(day: Date){
+        viewModel.onSwitchDay(day)
+    }
+
 }

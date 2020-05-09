@@ -61,10 +61,5 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         }
         todayTasks.postValue(list)
     }
-/*
-    fun setAdapter(adapter: TaskListAdapter){
-        todayTasks.observe(viewLifecycleOwner, Observer{ tasks ->
-            tasks?.let { adapter.setTasks(it) }
-    }*/
 
 }

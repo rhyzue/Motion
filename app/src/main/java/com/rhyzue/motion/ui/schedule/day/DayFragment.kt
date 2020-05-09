@@ -31,6 +31,7 @@ class DayFragment : Fragment() {
     private lateinit var dateTextView: TextView
     private val c: Calendar = Calendar.getInstance();
     private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy")
+    lateinit var taskFragment: TasksFragment
 
 
     override fun onCreateView(
@@ -46,9 +47,10 @@ class DayFragment : Fragment() {
         dateTextView = view.findViewById(R.id.date_textView)
         dateTextView.text=df.format(day)
 
+        taskFragment = TasksFragment()
 
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
-        ft.replace(R.id.tasks_container, TasksFragment())
+        ft.replace(R.id.tasks_container, taskFragment)
         ft.commit()
 
         return view
@@ -71,17 +73,17 @@ class DayFragment : Fragment() {
 
     private fun onSwitchDay(option: String){
         if(option=="prev"){
-            c.time = day;
+            c.time = day
             c.add(Calendar.DATE, -1)
             day = c.time
         }
         if(option=="next"){
-            c.time = day;
+            c.time = day
             c.add(Calendar.DATE, 1)
             day = c.time
         }
         dateTextView.text = df.format(day)
-        tasksViewModel.onSwitchDay(day)
+        taskFragment.onSwitchDay(day)
     }
 
 }
