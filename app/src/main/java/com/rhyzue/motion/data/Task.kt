@@ -2,6 +2,7 @@ package com.rhyzue.motion.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import org.apache.commons.lang3.time.DateUtils
 import java.util.*
 
 @Entity(tableName = "task")
@@ -36,6 +37,9 @@ interface TaskDao{
     @Query("DELETE FROM task")
     fun deleteAll()
 
+    @Query("SELECT * FROM task WHERE date_assigned BETWEEN :startDate AND :endDate")
+    fun getTaskByDate(startDate: Date, endDate: Date): List<Task>
+
 }
 
 class TaskRepository(private val taskDao: TaskDao) {
@@ -44,10 +48,6 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     suspend fun getTaskById(id: Int): Task{
         return taskDao.getTaskById(id)
-    }
-
-    fun deleteAll(){
-        taskDao.deleteAll()
     }
 
     fun insert(task: Task){
@@ -60,6 +60,16 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     suspend fun removeTask(id: Int){
         taskDao.removeTask(id)
+    }
+
+    fun getTaskByDate(date: Date): List<Task>{
+        val ed = DateUtils.addMilliseconds(DateUtils.ceiling(date, Calendar.DATE), -1)
+        val sd = DateUtils.truncate(date, Calendar.DATE)
+
+        println(ed.toString())
+        println(sd.toString())
+
+        return taskDao.getTaskByDate(sd, ed)
     }
 
 }

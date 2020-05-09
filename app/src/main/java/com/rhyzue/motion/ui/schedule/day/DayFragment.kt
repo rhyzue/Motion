@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.ui.schedule.tasks.AddTaskDialog
 import com.rhyzue.motion.ui.schedule.tasks.TasksFragment
+import com.rhyzue.motion.ui.schedule.tasks.TasksViewModel
 import kotlinx.android.synthetic.main.fragment_day.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,6 +26,7 @@ class DayFragment : Fragment() {
     }
 
     private lateinit var viewModel: DayViewModel
+    private lateinit var tasksViewModel: TasksViewModel
     private lateinit var day: Date
     private lateinit var dateTextView: TextView
     private val c: Calendar = Calendar.getInstance();
@@ -55,6 +57,7 @@ class DayFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DayViewModel::class.java)
+        tasksViewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
     }
 
     private fun onAddTask(){
@@ -78,6 +81,7 @@ class DayFragment : Fragment() {
             day = c.time
         }
         dateTextView.text = df.format(day)
+        tasksViewModel.onSwitchDay(day)
     }
 
 }

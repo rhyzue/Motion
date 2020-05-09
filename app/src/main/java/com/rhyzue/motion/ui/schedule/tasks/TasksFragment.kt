@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
+import java.util.*
 
 class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
 
@@ -53,9 +54,14 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
             recyclerView.layoutManager = LinearLayoutManager(contx)
 
             viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
-            viewModel.allTasks.observe(viewLifecycleOwner, Observer { tasks ->
-                tasks?.let { adapter.setTasks(it) }
-            })
+            viewModel.onSwitchDay(Date())
+            //viewModel.setAdapter(adapter)
+
+            activity?.let {
+                viewModel.todayTasks.observe(it, Observer{ tasks ->
+                    tasks?.let { t-> adapter.setTasks(t) }
+                })
+            }
         }
 
         return view

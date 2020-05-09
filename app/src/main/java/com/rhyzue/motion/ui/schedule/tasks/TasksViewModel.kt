@@ -3,6 +3,7 @@ package com.rhyzue.motion.ui.schedule.tasks
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.rhyzue.motion.data.*
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,11 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
 
 
     val allTasks: LiveData<List<Task>>
+    val todayTasks: MutableLiveData<List<Task>> by lazy {
+        MutableLiveData<List<Task>>()
+    }
     val allTypes: LiveData<List<Type>>
+
 
     init {
         val taskDao = AppDatabase.getDatabase(application, viewModelScope).taskDao()
@@ -27,11 +32,11 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
 
         allTasks = taskRepo.allTasks
         allTypes = typeRepo.allTypes
+
     }
 
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
-        val pr = taskRepo.insert(task)
-        println(pr)
+        taskRepo.insert(task)
     }
 
     fun getTaskById(id: Int): Task {
@@ -47,5 +52,19 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
     fun removeTask(id: Int)= viewModelScope.launch(Dispatchers.IO) {
         taskRepo.removeTask(id)
     }
+
+    fun onSwitchDay(day: Date)= viewModelScope.launch(Dispatchers.IO) {
+        //todayTasks.postValue(taskRepo.getTaskByDate(day))
+        val list = taskRepo.getTaskByDate(day)
+        for(i in list){
+            println(i)
+        }
+        todayTasks.postValue(list)
+    }
+/*
+    fun setAdapter(adapter: TaskListAdapter){
+        todayTasks.observe(viewLifecycleOwner, Observer{ tasks ->
+            tasks?.let { adapter.setTasks(it) }
+    }*/
 
 }

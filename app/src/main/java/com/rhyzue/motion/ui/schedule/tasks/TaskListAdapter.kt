@@ -49,6 +49,10 @@ class TaskListAdapter internal constructor(
 
     internal fun setTasks(tasks: List<Task>) {
         this.tasks = tasks
+        println("ADAPTER")
+        for(i in tasks){
+            println(i)
+        }
         notifyDataSetChanged()
     }
 
