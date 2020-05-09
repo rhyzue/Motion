@@ -65,7 +65,7 @@ class DayFragment : Fragment() {
     private fun onAddTask(){
         val dialog = AddTaskDialog()
         val bundle: Bundle = Bundle()
-        bundle.putSerializable("DATE_ASSIGNED", Date())
+        bundle.putSerializable("DATE_ASSIGNED", day)
         dialog.arguments = bundle
         dialog.show(childFragmentManager, "addTask")
     }

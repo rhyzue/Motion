@@ -24,7 +24,7 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
     private lateinit var viewModel: TasksViewModel
 
     override fun onConfirmDialogPositiveClick(dialog: DialogFragment, option: String, taskId: Int){
-        var task = viewModel.getTaskById(taskId)
+        val task = viewModel.getTaskById(taskId)
         when(option){
             "DELETE" -> viewModel.removeTask(taskId)
             "COMPLETE","INCOMPLETE" -> {
@@ -55,7 +55,6 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
 
             viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
             viewModel.onSwitchDay(Date())
-            //viewModel.setAdapter(adapter)
 
             activity?.let {
                 viewModel.todayTasks.observe(it, Observer{ tasks ->

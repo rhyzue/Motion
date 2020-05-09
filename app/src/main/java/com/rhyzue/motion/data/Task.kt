@@ -66,9 +66,6 @@ class TaskRepository(private val taskDao: TaskDao) {
         val ed = DateUtils.addMilliseconds(DateUtils.ceiling(date, Calendar.DATE), -1)
         val sd = DateUtils.truncate(date, Calendar.DATE)
 
-        println(ed.toString())
-        println(sd.toString())
-
         return taskDao.getTaskByDate(sd, ed)
     }
 

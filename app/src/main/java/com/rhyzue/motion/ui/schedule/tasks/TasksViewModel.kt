@@ -16,7 +16,6 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
     private val typeRepo: TypeRepository
 
 
-    val allTasks: LiveData<List<Task>>
     val todayTasks: MutableLiveData<List<Task>> by lazy {
         MutableLiveData<List<Task>>()
     }
@@ -30,13 +29,13 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         taskRepo = TaskRepository(taskDao)
         typeRepo = TypeRepository(typeDao)
 
-        allTasks = taskRepo.allTasks
         allTypes = typeRepo.allTypes
 
     }
 
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
         taskRepo.insert(task)
+        //todayTasks.postValue(task)
     }
 
     fun getTaskById(id: Int): Task {
@@ -54,12 +53,7 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun onSwitchDay(day: Date)= viewModelScope.launch(Dispatchers.IO) {
-        //todayTasks.postValue(taskRepo.getTaskByDate(day))
-        val list = taskRepo.getTaskByDate(day)
-        for(i in list){
-            println(i)
-        }
-        todayTasks.postValue(list)
+        todayTasks.postValue(taskRepo.getTaskByDate(day))
     }
 
 }
