@@ -119,13 +119,9 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
         viewModel.onSwitchDay(day)
     }
 
-    fun onStarTask(id: Int, starBtn: ImageButton){
+    fun onStarTask(id: Int){
         val t: Task = viewModel.getTaskById(id)
         t.starred = !t.starred
-        if(t.starred)
-            starBtn.setImageResource(R.drawable.star_filled)
-        else
-            starBtn.setImageResource(R.drawable.star_unfilled)
 
         viewModel.modifyTask(t)
     }

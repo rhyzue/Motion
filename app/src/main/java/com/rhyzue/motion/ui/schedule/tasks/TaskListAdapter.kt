@@ -38,16 +38,19 @@ class TaskListAdapter internal constructor(
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        println("BIND")
         val current = tasks[position]
-        println(current)
         holder.taskItemView.text = current.name
         holder.viewTaskBtn.setOnClickListener { parent.onEditTask(current.id) }
         holder.removeTaskBtn.setOnClickListener { parent.onRemoveTask(current.id) }
-        holder.starBtn.setOnClickListener{ parent.onStarTask(current.id, holder.starBtn)}
+        holder.starBtn.setOnClickListener{ parent.onStarTask(current.id)}
         holder.checkBox.setOnClickListener { parent.onCompleteTask(current.id)}
         holder.checkBox.buttonTintList =parent.getTypeColor(current.id)
         holder.checkBox.isChecked  = current.complete
+
+        if(current.starred)
+            holder.starBtn.setImageResource(R.drawable.star_filled)
+        else
+            holder.starBtn.setImageResource(R.drawable.star_unfilled)
 
         if (current.complete)
             holder.completeIndicator.visibility = View.VISIBLE
@@ -56,11 +59,13 @@ class TaskListAdapter internal constructor(
     }
 
     internal fun setTasks(tasks: List<Task>) {
-        this.tasks = tasks
-        println("ADAPTER")
-        for(i in tasks){
+
+        val sorted = tasks.sortedWith(compareBy<Task> { it.complete }.thenByDescending { it.starred })
+        for(i in sorted){
             println(i)
         }
+
+        this.tasks=sorted
         notifyDataSetChanged()
     }
 
