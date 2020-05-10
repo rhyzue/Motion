@@ -26,6 +26,7 @@ class TaskListAdapter internal constructor(
         val removeTaskBtn: ImageButton = itemView.findViewById(R.id.remove_task_btn)
         val checkBox: CheckBox = itemView.findViewById(R.id.complete_checkbox)
         val completeIndicator: View  = itemView.findViewById(R.id.complete_indicator)
+        val starBtn: ImageButton = itemView.findViewById(R.id.star_btn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -34,10 +35,12 @@ class TaskListAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        println("BIND")
         val current = tasks[position]
         holder.taskItemView.text = current.name
         holder.viewTaskBtn.setOnClickListener { parent.onEditTask(current.id) }
         holder.removeTaskBtn.setOnClickListener { parent.onRemoveTask(current.id) }
+        holder.starBtn.setOnClickListener{ parent.onStarTask(current.id, holder.starBtn)}
         holder.checkBox.setOnClickListener { parent.onCompleteTask(current.id)}
         holder.checkBox.isChecked  = current.complete
 

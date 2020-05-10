@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +40,11 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
                 viewModel.modifyTask(newTask)
             }
         }
+    }
+
+    override fun onConfirmDialogNegativeClick(dialog: DialogFragment, option: String, taskId: Int){
+        val task = viewModel.getTaskById(taskId)
+        viewModel.modifyTask(task)
     }
 
     override fun onCreateView(
@@ -89,22 +95,29 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
     }
 
     fun onCompleteTask(id: Int){
-        val complete: Boolean = viewModel.getTaskById(id).complete
+        val task = viewModel.getTaskById(id)
+        if(task!=null){
+            val complete = task.complete
+            val dialog = ConfirmDialog()
+            val bundle = Bundle()
+            bundle.putString("CONFIRM_MESSAGE", "Mark task as "+ if(complete) "Incomplete" else "Complete" + "?")
+            bundle.putString("OPTION", "COMPLETE")
+            bundle.putInt("TASK_ID", id)
+            dialog.arguments = bundle
+            dialog.setTargetFragment(this,0)
 
-
-        val dialog = ConfirmDialog()
-        val bundle = Bundle()
-        bundle.putString("CONFIRM_MESSAGE", "Mark task as "+ if(complete) "Incomplete" else "Complete" + "?")
-        bundle.putString("OPTION", "COMPLETE")
-        bundle.putInt("TASK_ID", id)
-        dialog.arguments = bundle
-        dialog.setTargetFragment(this,0)
-
-        dialog.show(parentFragmentManager, "confirmComplete")
+            dialog.show(parentFragmentManager, "confirmComplete")
+        }
     }
 
     fun onSwitchDay(day: Date){
         viewModel.onSwitchDay(day)
+    }
+
+    fun onStarTask(id: Int, starBtn: ImageButton){
+        val t: Task = viewModel.getTaskById(id)
+
+        starBtn.setImageResource(R.drawable.star_filled)
     }
 
 }

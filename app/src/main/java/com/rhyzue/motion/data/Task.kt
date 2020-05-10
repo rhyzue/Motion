@@ -10,6 +10,7 @@ data class Task(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo val name: String,
     @ColumnInfo val type: Int,
+    //@ColumnInfo val starred: Boolean,
     @ColumnInfo val date_assigned: Date,
     @ColumnInfo val complete: Boolean,
     @ColumnInfo val deadline: Date?,
