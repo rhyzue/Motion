@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,10 +24,26 @@ class GoalsFragment : Fragment() {
         goalsViewModel =
                 ViewModelProviders.of(this).get(GoalsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_goals, container, false)
-        val textView: TextView = root.findViewById(R.id.text_goals)
+
         goalsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+
         })
+        val goals_filter : Spinner = root.findViewById(R.id.goals_filter)
+        context?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.goals_filter,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                goals_filter.adapter = adapter
+            }
+        }
+
+        goals_filter.setSelection(0)
+        println("DJKAHD")
         return root
+
+
     }
 }

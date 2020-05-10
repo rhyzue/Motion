@@ -11,4 +11,19 @@
             None
         </item>
     </string-array>
+
+    <string-array name="goals_filter">
+        <item>
+            ALL
+        </item>
+        <item>
+            DONE
+        </item>
+        <item>
+            UNDO
+        </item>
+        <item>
+            PENDING
+        </item>
+    </string-array>
 </resources>
