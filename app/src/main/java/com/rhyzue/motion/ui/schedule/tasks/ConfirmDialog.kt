@@ -21,6 +21,7 @@ class ConfirmDialog() : DialogFragment() {
 
     interface ConfirmDialogListener {
         fun onConfirmDialogPositiveClick(dialog: DialogFragment, option: String, taskId: Int)
+        fun onConfirmDialogNegativeClick(dialog: DialogFragment, option: String, taskId: Int)
     }
 
     override fun onAttach(context: Context) {
@@ -54,6 +55,8 @@ class ConfirmDialog() : DialogFragment() {
                         })
                     .setNegativeButton("No",
                         DialogInterface.OnClickListener { dialog, _ ->
+                            if(taskId!=-1)
+                                listener.onConfirmDialogNegativeClick(this, option, taskId)
                             dialog.cancel()
                         })
             }
