@@ -45,7 +45,7 @@ abstract class AppDatabase : RoomDatabase() {
 
                 INSTANCE?.let { _ ->
                     db.execSQL("DELETE FROM task")
-                    db.execSQL("INSERT INTO type (name,description,color) VALUES ('None',null,'#FFFFFF')")
+                    db.execSQL("INSERT INTO type (name,description,color) VALUES ('None',null,'black')")
                 }
             }
         }

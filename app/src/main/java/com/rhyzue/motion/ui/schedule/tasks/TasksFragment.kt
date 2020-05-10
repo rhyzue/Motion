@@ -1,11 +1,13 @@
 package com.rhyzue.motion.ui.schedule.tasks
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
+import com.rhyzue.motion.data.Type
+import org.apache.commons.lang3.ClassUtils.getPackageName
 import java.util.*
 
 class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
@@ -31,11 +35,12 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
             "COMPLETE","INCOMPLETE" -> {
                 val newTask = Task(id=task.id,
                     name=task.name,
-                    type=task.type,
+                    type_id=task.type_id,
                     date_assigned = task.date_assigned,
                     complete=!task.complete,
                     deadline = task.deadline,
-                    goal_id = task.goal_id
+                    goal_id = task.goal_id,
+                    starred = false
                 )
                 viewModel.modifyTask(newTask)
             }
@@ -116,8 +121,20 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
 
     fun onStarTask(id: Int, starBtn: ImageButton){
         val t: Task = viewModel.getTaskById(id)
+        t.starred = !t.starred
+        if(t.starred)
+            starBtn.setImageResource(R.drawable.star_filled)
+        else
+            starBtn.setImageResource(R.drawable.star_unfilled)
 
-        starBtn.setImageResource(R.drawable.star_filled)
+        viewModel.modifyTask(t)
+    }
+
+    fun getTypeColor(taskId: Int): ColorStateList{
+        val task: Task = viewModel.getTaskById(taskId)
+        val type: Type = viewModel.getTypeById(task.type_id)
+        return ColorStateList.valueOf(ResourcesCompat.getColor(resources,
+            resources.getIdentifier(type.color, "color", context?.packageName),null))
     }
 
 }

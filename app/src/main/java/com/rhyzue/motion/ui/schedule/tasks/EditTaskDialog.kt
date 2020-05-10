@@ -111,7 +111,7 @@ class EditTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogList
             }
         })
 
-        types.find { t -> t.id == task.type }?.id?.let { typesSpinner.setSelection(it) }
+        types.find { t -> t.id == task.type_id }?.id?.let { typesSpinner.setSelection(it) }
 
         dialog.findViewById<ImageButton>(R.id.select_deadline_btn).setOnClickListener { showDatePicker() }
 
@@ -137,7 +137,7 @@ class EditTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogList
         val typePkey = types.find{ x -> x.name==typeName}?.id
 
         if(typePkey!=null){
-            val newTask = Task(id=task.id,name=name,type = typePkey,goal_id = 0,date_assigned = task.date_assigned,complete=complete,deadline=deadline)
+            val newTask = Task(id=task.id,name=name,type_id = typePkey,goal_id = 0,date_assigned = task.date_assigned,complete=complete,deadline=deadline, starred=false)
             viewModel.modifyTask(newTask)
         }
 

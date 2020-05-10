@@ -83,4 +83,10 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
         todayTasks.postValue(taskRepo.getTaskByDate(day))
     }
 
+    fun getTypeById(id: Int): Type {
+        return runBlocking {
+            typeRepo.getTypeById(id)
+        }
+    }
+
 }

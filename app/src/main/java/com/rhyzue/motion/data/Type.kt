@@ -20,6 +20,9 @@ interface TypeDao{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(type: Type)
 
+    @Query("SELECT * FROM type WHERE id = :id")
+    suspend fun getTypeById(id: Int): Type
+
     @Query("DELETE FROM type")
     fun deleteAll()
 
@@ -29,12 +32,12 @@ class TypeRepository(private val typeDao: TypeDao) {
 
     val allTypes: LiveData<List<Type>> = typeDao.getAllTypes()
 
-    fun getAllTypes(){
-        typeDao.getAllTypes()
-    }
-
     fun insert(type: Type){
         typeDao.insert(type)
+    }
+
+    suspend fun getTypeById(id: Int): Type{
+        return typeDao.getTypeById(id)
     }
 
 }

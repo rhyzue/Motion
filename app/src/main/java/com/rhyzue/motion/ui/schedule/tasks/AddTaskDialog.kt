@@ -125,7 +125,7 @@ class AddTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogListe
         val typePkey = types.find{ x -> x.name==typeName}?.id
 
         if(dateAssigned!=null && typePkey!=null){
-            val task = Task(name=name,type = typePkey,goal_id = 0,date_assigned = dateAssigned!!,complete=complete,deadline=deadline)
+            val task = Task(name=name,type_id = typePkey,goal_id = 0, starred = false, date_assigned = dateAssigned!!,complete=complete,deadline=deadline)
             viewModel.insertTask(task)
         }
 

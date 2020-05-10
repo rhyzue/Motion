@@ -1,12 +1,14 @@
 package com.rhyzue.motion.ui.schedule.tasks
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
@@ -34,16 +36,17 @@ class TaskListAdapter internal constructor(
         return TaskViewHolder(itemView)
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         println("BIND")
         val current = tasks[position]
         println(current)
-        println(position)
         holder.taskItemView.text = current.name
         holder.viewTaskBtn.setOnClickListener { parent.onEditTask(current.id) }
         holder.removeTaskBtn.setOnClickListener { parent.onRemoveTask(current.id) }
         holder.starBtn.setOnClickListener{ parent.onStarTask(current.id, holder.starBtn)}
         holder.checkBox.setOnClickListener { parent.onCompleteTask(current.id)}
+        holder.checkBox.buttonTintList =parent.getTypeColor(current.id)
         holder.checkBox.isChecked  = current.complete
 
         if (current.complete)
