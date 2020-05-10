@@ -51,10 +51,31 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
 
     fun modifyTask(task: Task)= viewModelScope.launch(Dispatchers.IO) {
         taskRepo.modifyTask(task)
+        val mutableList = mutableListOf<Task>()
+        todayTasks.value?.let {
+            for(i in todayTasks.value!!){
+                if(i.id==task.id)
+                    mutableList.add(task)
+                else
+                    mutableList.add(i)
+            }
+        }
+
+        todayTasks.postValue(mutableList.toList())
     }
 
     fun removeTask(id: Int)= viewModelScope.launch(Dispatchers.IO) {
         taskRepo.removeTask(id)
+
+        val mutableList = mutableListOf<Task>()
+        todayTasks.value?.let {
+            for(i in todayTasks.value!!){
+                if(i.id!=id)
+                    mutableList.add(i)
+            }
+        }
+
+        todayTasks.postValue(mutableList.toList())
     }
 
     fun onSwitchDay(day: Date)= viewModelScope.launch(Dispatchers.IO) {

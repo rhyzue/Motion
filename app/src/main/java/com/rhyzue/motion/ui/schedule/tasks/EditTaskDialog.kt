@@ -42,7 +42,7 @@ class EditTaskDialog : DialogFragment(), DateTimePickerDialog.DateTimeDialogList
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
+        viewModel = activity?.let { ViewModelProvider(it).get(TasksViewModel::class.java) }!!
         fragment = this
 
         return activity?.let { it ->
