@@ -53,7 +53,7 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(contx)
 
-            viewModel = ViewModelProvider(this).get(TasksViewModel::class.java)
+            viewModel = activity?.let { ViewModelProvider(it).get(TasksViewModel::class.java) }!!
             viewModel.onSwitchDay(Date())
 
             activity?.let {
