@@ -37,6 +37,8 @@ class TaskListAdapter internal constructor(
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         println("BIND")
         val current = tasks[position]
+        println(current)
+        println(position)
         holder.taskItemView.text = current.name
         holder.viewTaskBtn.setOnClickListener { parent.onEditTask(current.id) }
         holder.removeTaskBtn.setOnClickListener { parent.onRemoveTask(current.id) }

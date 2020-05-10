@@ -27,7 +27,7 @@ interface TaskDao{
     suspend fun getTaskById(id: Int): Task
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(task: Task)
+    fun insert(task: Task): Long
 
     @Update(onConflict = OnConflictStrategy.ABORT)
     suspend fun modifyTask(task: Task)
@@ -51,8 +51,8 @@ class TaskRepository(private val taskDao: TaskDao) {
         return taskDao.getTaskById(id)
     }
 
-    fun insert(task: Task){
-        taskDao.insert(task)
+    fun insert(task: Task): Long{
+        return taskDao.insert(task)
     }
 
     suspend fun modifyTask(task: Task){

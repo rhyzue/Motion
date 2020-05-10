@@ -34,11 +34,12 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
-        taskRepo.insert(task)
+        val newId = taskRepo.insert(task)
+        val newTask: Task = taskRepo.getTaskById(newId.toInt())
         val mutableList = mutableListOf<Task>()
         todayTasks.value?.let {
             mutableList.addAll(it)
-            mutableList.add(task)
+            mutableList.add(newTask)
         }
         todayTasks.postValue(mutableList.toList())
     }
