@@ -1,11 +1,13 @@
 package com.rhyzue.motion.ui.schedule
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +21,7 @@ class ScheduleFragment : Fragment() {
 
     private lateinit var scheduleViewModel: ScheduleViewModel
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -29,9 +32,8 @@ class ScheduleFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
 
 
-        view.radio_month.setOnClickListener{view -> onScheduleTypeChange(view)}
-        view.radio_week.setOnClickListener{view -> onScheduleTypeChange(view)}
-        view.radio_day.setOnClickListener{view -> onScheduleTypeChange(view)}
+        view.radio_month.setOnClickListener{v -> onScheduleTypeChange(v)}
+        view.radio_day.setOnClickListener{v -> onScheduleTypeChange(v)}
 
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
         ft.replace(R.id.calendar_container, MonthFragment())
@@ -40,6 +42,7 @@ class ScheduleFragment : Fragment() {
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun onScheduleTypeChange(view: View) {
         if (view is RadioButton) {
             val checked = view.isChecked
@@ -52,12 +55,6 @@ class ScheduleFragment : Fragment() {
                         ft.replace(R.id.calendar_container, MonthFragment())
                         ft.commit()
                     }
-                R.id.radio_week ->
-                    if (checked) {
-                        //display week view
-                        ft.replace(R.id.calendar_container, WeekFragment())
-                        ft.commit()
-                    }
                 R.id.radio_day ->
                     if (checked) {
                         //display day view
@@ -65,10 +62,6 @@ class ScheduleFragment : Fragment() {
                         ft.commit()
                     }
             }
-        }
-        else{
-            Log.i("LOG", "NOT RADIOBUTTON")
-            println("NOT RADIOBUTTON")
         }
     }
 }

@@ -25,7 +25,6 @@ class MonthFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_month, container, false)
-        dayTextView = view.findViewById(R.id.textView)
         return view
     }
 
