@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/task_recycler_mini"
+        <FrameLayout
+            android:id="@+id/task_recycler_mini_container"
             android:layout_width="350dp"
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.3"
@@ -21,15 +21,30 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/daycontainer_border"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.1"/>
+            app:layout_constraintVertical_bias="0.1"
+            android:background="@drawable/daycontainer_border">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/task_recycler_mini"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:scrollbars="vertical"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+
+            <TextView
+                android:id="@+id/no_tasks_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="No tasks today. Add some by clicking here!"
+                android:clickable="true"
+                android:focusable="true" />
+        </FrameLayout>
 
         <CalendarView
             android:id="@+id/month_calendarView"
@@ -44,6 +59,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_recycler_mini" />
+            app:layout_constraintTop_toBottomOf="@+id/task_recycler_mini_container" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

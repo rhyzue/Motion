@@ -1,6 +1,7 @@
 package com.rhyzue.motion.ui.schedule.month
 
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,9 +19,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
 import com.rhyzue.motion.data.Type
+import com.rhyzue.motion.ui.schedule.ScheduleFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.O)
 class MonthFragment : Fragment() {
 
     companion object {
@@ -28,7 +32,8 @@ class MonthFragment : Fragment() {
 
     private lateinit var viewModel: MonthViewModel
     private lateinit var calendarView: CalendarView
-    private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy")
+    private lateinit var noTaskView: TextView
+    private var curDate: Date = Date()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +44,11 @@ class MonthFragment : Fragment() {
         calendarView = view.findViewById(R.id.month_calendarView)
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth -> onDateSelected( year, month, dayOfMonth) }
 
+        noTaskView = view.findViewById(R.id.no_tasks_view)
+        noTaskView.setOnClickListener { navToDate(curDate) }
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recycler_mini)
+
         val contx = context
         if(contx!=null) {
             val adapter = TaskAdapterMini(contx, this)
@@ -51,7 +60,15 @@ class MonthFragment : Fragment() {
 
             activity?.let {
                 viewModel.todayTasks.observe(it, Observer{ tasks: List<Task> ->
-                    tasks.let { t-> adapter.setTasks(t) }
+                    tasks.let { t->
+                        adapter.setTasks(t)
+                        if(t.isEmpty()){
+                            noTaskView.text="No tasks today. Add some by clicking here!"
+                        }
+                        else{
+                            noTaskView.text=""
+                        }
+                    }
                 })
             }
         }
@@ -68,6 +85,7 @@ class MonthFragment : Fragment() {
         val c: Calendar = Calendar.getInstance()
         c.set(year, month, dayOfMonth)
         viewModel.onSwitchDay(c.time)
+        curDate = c.time
     }
 
     fun getTypeColor(taskId: Int): ColorStateList {
@@ -76,6 +94,11 @@ class MonthFragment : Fragment() {
         return ColorStateList.valueOf(
             ResourcesCompat.getColor(resources,
             resources.getIdentifier(type.color, "color", context?.packageName),null))
+    }
+
+    private fun navToDate(day: Date){
+        val scheduleFrag = parentFragment as ScheduleFragment
+        scheduleFrag.navToDate(day)
     }
 
 

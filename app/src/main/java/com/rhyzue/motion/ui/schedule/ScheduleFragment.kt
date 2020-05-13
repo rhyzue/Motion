@@ -2,7 +2,6 @@ package com.rhyzue.motion.ui.schedule
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +13,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
 import com.rhyzue.motion.ui.schedule.day.DayFragment
 import com.rhyzue.motion.ui.schedule.month.*
-import com.rhyzue.motion.ui.schedule.week.WeekFragment
 import kotlinx.android.synthetic.main.fragment_schedule.view.*
+import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.O)
 class ScheduleFragment : Fragment() {
 
     private lateinit var scheduleViewModel: ScheduleViewModel
+    private lateinit var curFragment: View
+    private val monthFragment: MonthFragment = MonthFragment()
+    private val dayFragment: DayFragment = DayFragment()
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -29,20 +32,19 @@ class ScheduleFragment : Fragment() {
     ): View? {
         scheduleViewModel =
                 ViewModelProvider(this).get(ScheduleViewModel::class.java)
-        val view = inflater.inflate(R.layout.fragment_schedule, container, false)
+        curFragment = inflater.inflate(R.layout.fragment_schedule, container, false)
 
-
-        view.radio_month.setOnClickListener{v -> onScheduleTypeChange(v)}
-        view.radio_day.setOnClickListener{v -> onScheduleTypeChange(v)}
+        curFragment.radio_month.setOnClickListener{v -> onScheduleTypeChange(v)}
+        curFragment.radio_day.setOnClickListener{v -> onScheduleTypeChange(v)}
 
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
-        ft.replace(R.id.calendar_container, MonthFragment())
+        ft.replace(R.id.calendar_container, monthFragment)
         ft.commit()
 
-        return view
+        return curFragment
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     private fun onScheduleTypeChange(view: View) {
         if (view is RadioButton) {
             val checked = view.isChecked
@@ -52,16 +54,28 @@ class ScheduleFragment : Fragment() {
                 R.id.radio_month ->
                     if (checked) {
                         //display month view
-                        ft.replace(R.id.calendar_container, MonthFragment())
+                        ft.replace(R.id.calendar_container, monthFragment)
                         ft.commit()
                     }
                 R.id.radio_day ->
                     if (checked) {
                         //display day view
-                        ft.replace(R.id.calendar_container, DayFragment())
+                        ft.replace(R.id.calendar_container, dayFragment)
                         ft.commit()
                     }
             }
         }
     }
+
+    fun navToDate(day: Date){
+        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+        ft.replace(R.id.calendar_container, dayFragment)
+        ft.commit()
+
+        val radioButton: RadioButton = curFragment.findViewById(R.id.radio_day)
+        radioButton.isChecked = true
+        dayFragment.setDay(day)
+    }
+
+
 }

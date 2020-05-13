@@ -27,7 +27,7 @@ class DayFragment : Fragment() {
 
     private lateinit var viewModel: DayViewModel
     private lateinit var tasksViewModel: TasksViewModel
-    private lateinit var day: Date
+    private var day: Date = Date()
     private lateinit var dateTextView: TextView
     private val c: Calendar = Calendar.getInstance();
     private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy")
@@ -39,7 +39,6 @@ class DayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_day, container, false)
-        day = Date()
 
         view.add_task_button.setOnClickListener{onAddTask()}
         view.btn_prev_day.setOnClickListener{onSwitchDay("prev")}
@@ -84,6 +83,10 @@ class DayFragment : Fragment() {
         }
         dateTextView.text = df.format(day)
         taskFragment.onSwitchDay(day)
+    }
+
+    fun setDay(day: Date){
+        this.day = day
     }
 
 }
