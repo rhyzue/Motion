@@ -40,40 +40,64 @@
 
         </RadioGroup>
 
-        <ImageButton
-            android:id="@+id/calendar_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            android:padding="1dp"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/ic_calendar_view_day_24px"
-            />
 
-        <ImageButton
-            android:id="@+id/unfinishedTasks_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#99FFFFFF"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/incomplete_colored"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            android:padding="4dp"/>
+            android:paddingRight="4dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp">
 
-        <ImageButton
-            android:id="@+id/finishedTasks_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            <ImageButton
+                android:id="@+id/unfinishedTasks_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/incomplete_colored"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:padding="4dp"/>
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:text="000"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#99FFFFFF"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/complete_colored"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            android:padding="4dp"
-            android:layout_marginStart="10dp" />
+            android:paddingRight="4dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp">
+
+            <ImageButton
+                android:id="@+id/finishedTasks_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/complete_colored"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:layout_marginStart="10dp" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:text="000"
+                android:gravity="center"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
