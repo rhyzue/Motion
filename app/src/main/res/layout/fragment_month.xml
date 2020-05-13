@@ -12,16 +12,19 @@
         android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dayview_mini"
+            android:id="@+id/task_recycler_mini"
             android:layout_width="350dp"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.3"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/daycontainer_border"
-            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +44,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dayview_mini" />
+            app:layout_constraintTop_toBottomOf="@+id/task_recycler_mini" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

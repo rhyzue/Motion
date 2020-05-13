@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:id="@+id/star_btn_mini"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/star_unfilled"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                />
+
+            <CheckBox
+                android:id="@+id/complete_checkbox_mini"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="2dp"
+                android:clickable="false"/>
+
+            <TextView
+                android:id="@+id/task_text_mini"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:textSize="16sp"
+                android:text = "test"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
+
+    <View
+        android:id="@+id/complete_indicator_mini"
+        android:layout_width="325dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:background="@android:color/black"
+        android:visibility="gone"/>
+
+</FrameLayout>
