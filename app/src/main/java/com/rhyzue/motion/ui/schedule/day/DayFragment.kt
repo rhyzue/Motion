@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.rhyzue.motion.R
+import com.rhyzue.motion.ui.schedule.ScheduleFragment
 import com.rhyzue.motion.ui.schedule.tasks.AddTaskDialog
 import com.rhyzue.motion.ui.schedule.tasks.TasksFragment
 import com.rhyzue.motion.ui.schedule.tasks.TasksViewModel
@@ -87,6 +88,11 @@ class DayFragment : Fragment() {
 
     fun setDay(day: Date){
         this.day = day
+    }
+
+    fun setTaskCount(unfinished: Int, finished: Int){
+        val scheduleFrag = parentFragment as ScheduleFragment
+        scheduleFrag.setTaskCount(unfinished, finished)
     }
 
 }

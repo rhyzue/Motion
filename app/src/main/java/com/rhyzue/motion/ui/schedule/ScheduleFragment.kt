@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -21,6 +22,8 @@ class ScheduleFragment : Fragment() {
 
     private lateinit var scheduleViewModel: ScheduleViewModel
     private lateinit var curFragment: View
+    private lateinit var finishedTasksCount: TextView
+    private lateinit var unFinishedTasksCount: TextView
     private val monthFragment: MonthFragment = MonthFragment()
     private val dayFragment: DayFragment = DayFragment()
 
@@ -33,6 +36,9 @@ class ScheduleFragment : Fragment() {
         scheduleViewModel =
                 ViewModelProvider(this).get(ScheduleViewModel::class.java)
         curFragment = inflater.inflate(R.layout.fragment_schedule, container, false)
+
+        finishedTasksCount = curFragment.findViewById(R.id.finishedTasks_count)
+        unFinishedTasksCount = curFragment.findViewById(R.id.unfinishedTasks_count)
 
         curFragment.radio_month.setOnClickListener{v -> onScheduleTypeChange(v)}
         curFragment.radio_day.setOnClickListener{v -> onScheduleTypeChange(v)}
@@ -67,7 +73,7 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    fun navToDate(day: Date){
+    fun navToDayView(day: Date){
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
         ft.replace(R.id.calendar_container, dayFragment)
         ft.commit()
@@ -75,6 +81,11 @@ class ScheduleFragment : Fragment() {
         val radioButton: RadioButton = curFragment.findViewById(R.id.radio_day)
         radioButton.isChecked = true
         dayFragment.setDay(day)
+    }
+
+    fun setTaskCount(unfinished: Int, finished: Int){
+        unFinishedTasksCount.text = unfinished.toString()
+        finishedTasksCount.text = finished.toString()
     }
 
 

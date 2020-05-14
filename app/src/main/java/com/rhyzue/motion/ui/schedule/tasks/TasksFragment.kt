@@ -1,12 +1,14 @@
 package com.rhyzue.motion.ui.schedule.tasks
 
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
@@ -17,9 +19,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rhyzue.motion.R
 import com.rhyzue.motion.data.Task
 import com.rhyzue.motion.data.Type
+import com.rhyzue.motion.ui.schedule.day.DayFragment
 import org.apache.commons.lang3.ClassUtils.getPackageName
 import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.O)
 class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
 
     companion object {
@@ -69,7 +73,12 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
 
             activity?.let {
                 viewModel.todayTasks.observe(it, Observer{ tasks ->
-                    tasks?.let { t-> adapter.setTasks(t) }
+                    tasks?.let { t-> adapter.setTasks(t)
+                        //val unfinished: Int = t.count { c -> !c.complete }
+                        //val finished: Int = t.count{ c-> c.complete}
+                        //val dayFrag = parentFragment as DayFragment
+                        //dayFrag.setTaskCount(unfinished, finished)
+                    }
                 })
             }
         }

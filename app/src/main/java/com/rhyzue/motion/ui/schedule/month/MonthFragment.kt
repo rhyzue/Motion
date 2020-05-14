@@ -45,7 +45,7 @@ class MonthFragment : Fragment() {
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth -> onDateSelected( year, month, dayOfMonth) }
 
         noTaskView = view.findViewById(R.id.no_tasks_view)
-        noTaskView.setOnClickListener { navToDate(curDate) }
+        noTaskView.setOnClickListener { navToDayView(curDate) }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recycler_mini)
 
@@ -68,6 +68,9 @@ class MonthFragment : Fragment() {
                         else{
                             noTaskView.text=""
                         }
+                        //val unfinished: Int = t.count { c -> !c.complete }
+                        //val finished: Int = t.count{ c-> c.complete}
+                        //setTaskCount(unfinished, finished)
                     }
                 })
             }
@@ -96,11 +99,14 @@ class MonthFragment : Fragment() {
             resources.getIdentifier(type.color, "color", context?.packageName),null))
     }
 
-    private fun navToDate(day: Date){
+    private fun navToDayView(day: Date){
         val scheduleFrag = parentFragment as ScheduleFragment
-        scheduleFrag.navToDate(day)
+        scheduleFrag.navToDayView(day)
     }
 
-
+    private fun setTaskCount(unfinished: Int, finished: Int){
+        val scheduleFrag = parentFragment as ScheduleFragment
+        scheduleFrag.setTaskCount(unfinished, finished)
+    }
 
 }
