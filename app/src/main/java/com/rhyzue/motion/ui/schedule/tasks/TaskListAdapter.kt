@@ -36,7 +36,7 @@ class TaskListAdapter internal constructor(
         return TaskViewHolder(itemView)
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val current = tasks[position]
         holder.taskItemView.text = current.name

@@ -37,7 +37,6 @@ class MonthFragment : Fragment() {
     private lateinit var noTaskView: TextView
     private lateinit var navToDayView: ImageButton
     private var curDate: Date = Date()
-    private lateinit var navBtn: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
