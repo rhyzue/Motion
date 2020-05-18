@@ -69,8 +69,14 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
             recyclerView.layoutManager = LinearLayoutManager(contx)
 
             viewModel = activity?.let { ViewModelProvider(it).get(TasksViewModel::class.java) }!!
-            viewModel.onSwitchDay(Date())
-
+            arguments?.let{ x ->
+                val date = x.getSerializable("DATE") as Date?
+                if (date != null) {
+                    println("DATE")
+                    println(date)
+                    viewModel.onSwitchDay(date)
+                }
+            }
             activity?.let {
                 viewModel.todayTasks.observe(it, Observer{ tasks ->
                     tasks?.let { t-> adapter.setTasks(t)

@@ -48,9 +48,12 @@ class DayFragment : Fragment() {
         dateTextView.text=df.format(day)
 
         tasksViewModel = activity?.let { ViewModelProvider(it).get(TasksViewModel::class.java) }!!
-        tasksViewModel.onSwitchDay(day)
 
         taskFragment = TasksFragment()
+        val bundle: Bundle = Bundle()
+        bundle.putSerializable("DATE", day)
+        taskFragment.arguments = bundle
+
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
         ft.replace(R.id.tasks_container, taskFragment)
         ft.commit()
