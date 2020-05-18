@@ -34,16 +34,25 @@
                 android:paddingLeft="10dp"
                 android:scrollbars="vertical"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"/>
+                android:layout_width="match_parent" />
+
+            <ImageButton
+                android:id="@+id/nav_to_dayView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_calendar_view_day_24px"
+                android:layout_margin="10dp"
+                android:layout_gravity="end"/>
 
             <TextView
                 android:id="@+id/no_tasks_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:text="No tasks today. Add some by clicking here!"
-                android:clickable="true"
-                android:focusable="true" />
+                android:text="No tasks today. Add some by clicking the top-right button!"
+                android:clickable="false" />
         </FrameLayout>
 
         <CalendarView

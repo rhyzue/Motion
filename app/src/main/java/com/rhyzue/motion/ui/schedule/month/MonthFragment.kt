@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CalendarView
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
@@ -33,7 +35,9 @@ class MonthFragment : Fragment() {
     private lateinit var viewModel: MonthViewModel
     private lateinit var calendarView: CalendarView
     private lateinit var noTaskView: TextView
+    private lateinit var navToDayView: ImageButton
     private var curDate: Date = Date()
+    private lateinit var navBtn: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +47,9 @@ class MonthFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_month, container, false)
         calendarView = view.findViewById(R.id.month_calendarView)
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth -> onDateSelected( year, month, dayOfMonth) }
-
+        navToDayView = view.findViewById(R.id.nav_to_dayView)
+        navToDayView.setOnClickListener { navToDayView(curDate) }
         noTaskView = view.findViewById(R.id.no_tasks_view)
-        noTaskView.setOnClickListener { navToDayView(curDate) }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recycler_mini)
 
@@ -63,10 +67,10 @@ class MonthFragment : Fragment() {
                     tasks.let { t->
                         adapter.setTasks(t)
                         if(t.isEmpty()){
-                            noTaskView.text="No tasks today. Add some by clicking here!"
+                            noTaskView.visibility=View.VISIBLE
                         }
                         else{
-                            noTaskView.text=""
+                            noTaskView.visibility=View.GONE
                         }
                         //val unfinished: Int = t.count { c -> !c.complete }
                         //val finished: Int = t.count{ c-> c.complete}
