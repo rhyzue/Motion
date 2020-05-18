@@ -72,9 +72,9 @@ class MonthFragment : Fragment() {
                         else{
                             noTaskView.visibility=View.GONE
                         }
-                        //val unfinished: Int = t.count { c -> !c.complete }
-                        //val finished: Int = t.count{ c-> c.complete}
-                        //setTaskCount(unfinished, finished)
+                        val unfinished: Int = t.count { c -> !c.complete }
+                        val finished: Int = t.count{ c-> c.complete}
+                        setTaskCount(unfinished, finished)
                     }
                 })
             }

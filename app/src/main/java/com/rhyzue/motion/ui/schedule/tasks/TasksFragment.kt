@@ -31,6 +31,7 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
     }
 
     private lateinit var viewModel: TasksViewModel
+    private lateinit var  dayFrag: DayFragment
 
     override fun onConfirmDialogPositiveClick(dialog: DialogFragment, option: String, taskId: Int){
         val task = viewModel.getTaskById(taskId)
@@ -61,6 +62,8 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_tasks, container, false)
+        dayFrag = parentFragment as DayFragment
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recycler)
         val contx = context
         if(contx!=null) {
@@ -80,10 +83,9 @@ class TasksFragment : Fragment(), ConfirmDialog.ConfirmDialogListener {
             activity?.let {
                 viewModel.todayTasks.observe(it, Observer{ tasks ->
                     tasks?.let { t-> adapter.setTasks(t)
-                        //val unfinished: Int = t.count { c -> !c.complete }
-                        //val finished: Int = t.count{ c-> c.complete}
-                        //val dayFrag = parentFragment as DayFragment
-                        //dayFrag.setTaskCount(unfinished, finished)
+                        val unfinished: Int = t.count { c -> !c.complete }
+                        val finished: Int = t.count{ c-> c.complete}
+                        dayFrag.setTaskCount(unfinished, finished)
                     }
                 })
             }
