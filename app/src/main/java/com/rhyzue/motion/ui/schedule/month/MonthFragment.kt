@@ -36,6 +36,7 @@ class MonthFragment : Fragment() {
     private lateinit var calendarView: CalendarView
     private lateinit var noTaskView: TextView
     private lateinit var navToDayView: ImageButton
+    private lateinit var scheduleFrag: ScheduleFragment
     private var curDate: Date = Date()
 
     override fun onCreateView(
@@ -49,6 +50,8 @@ class MonthFragment : Fragment() {
         navToDayView = view.findViewById(R.id.nav_to_dayView)
         navToDayView.setOnClickListener { navToDayView(curDate) }
         noTaskView = view.findViewById(R.id.no_tasks_view)
+
+        scheduleFrag = parentFragment as ScheduleFragment
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.task_recycler_mini)
 
@@ -73,6 +76,7 @@ class MonthFragment : Fragment() {
                         }
                         val unfinished: Int = t.count { c -> !c.complete }
                         val finished: Int = t.count{ c-> c.complete}
+
                         setTaskCount(unfinished, finished)
                     }
                 })
@@ -108,7 +112,6 @@ class MonthFragment : Fragment() {
     }
 
     private fun setTaskCount(unfinished: Int, finished: Int){
-        val scheduleFrag = parentFragment as ScheduleFragment
         scheduleFrag.setTaskCount(unfinished, finished)
     }
 

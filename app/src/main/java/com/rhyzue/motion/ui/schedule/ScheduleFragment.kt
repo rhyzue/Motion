@@ -73,6 +73,13 @@ class ScheduleFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+        ft.replace(R.id.calendar_container, monthFragment)
+        ft.commit()
+    }
+
     fun navToDayView(day: Date){
         val ft: FragmentTransaction = childFragmentManager.beginTransaction()
         ft.replace(R.id.calendar_container, dayFragment)
