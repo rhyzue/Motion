@@ -42,7 +42,7 @@ class TasksViewModel(application: Application) : AndroidViewModel(application){
             mutableList.add(newTask)
         }
         todayTasks.postValue(mutableList.toList())
-    }
+}
 
     fun getTaskById(id: Int): Task {
         return runBlocking{

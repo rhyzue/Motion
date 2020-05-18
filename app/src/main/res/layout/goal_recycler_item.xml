@@ -15,7 +15,7 @@
         tools:layout_editor_absoluteY="16dp">
 
         <ImageButton
-            android:id="@+id/star_btn"
+            android:id="@+id/downDrop_btn"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
@@ -60,5 +60,17 @@
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/baseline_more_horiz_black_18dp" />
+
+        <ImageButton
+            android:id="@+id/goal_status"
+            android:layout_width="37dp"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/clock" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
