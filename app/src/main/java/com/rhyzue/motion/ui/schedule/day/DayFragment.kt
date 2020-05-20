@@ -33,6 +33,7 @@ class DayFragment : Fragment() {
     private val c: Calendar = Calendar.getInstance();
     private val df: SimpleDateFormat = SimpleDateFormat("MMM dd yyyy")
     private lateinit var taskFragment: TasksFragment
+    private lateinit var scheduleFrag: ScheduleFragment
 
 
     override fun onCreateView(
@@ -40,6 +41,7 @@ class DayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_day, container, false)
+        scheduleFrag = parentFragment as ScheduleFragment
 
         view.add_task_button.setOnClickListener{onAddTask()}
         view.btn_prev_day.setOnClickListener{onSwitchDay("prev")}
@@ -95,7 +97,6 @@ class DayFragment : Fragment() {
     }
 
     fun setTaskCount(unfinished: Int, finished: Int){
-        val scheduleFrag = parentFragment as ScheduleFragment
         scheduleFrag.setTaskCount(unfinished, finished)
     }
 

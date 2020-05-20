@@ -39,6 +39,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.pnikosis:materialish-progress:1.7'
+
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

@@ -1,13 +1,29 @@
 package com.rhyzue.motion.ui.dashboard
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.rhyzue.motion.data.AppDatabase
+import com.rhyzue.motion.data.Task
+import com.rhyzue.motion.data.TaskRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.*
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel(application: Application) : AndroidViewModel(application){
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    private val taskRepo: TaskRepository
+
+    val todayTasks: MutableLiveData<List<Task>> by lazy {
+        MutableLiveData<List<Task>>()
     }
-    val text: LiveData<String> = _text
+
+    init{
+        val taskDao = AppDatabase.getDatabase(application, viewModelScope).taskDao()
+        taskRepo = TaskRepository(taskDao)
+    }
+
+    fun setTasks(date: Date) = viewModelScope.launch(Dispatchers.IO) {
+        todayTasks.postValue(taskRepo.getTaskByDate(date))
+    }
+
 }
