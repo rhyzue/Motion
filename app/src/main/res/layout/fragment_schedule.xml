@@ -21,7 +21,7 @@
             android:id="@+id/schedule_type_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/radiogroup_border"
+            android:background="@drawable/bg_radiogroup_border"
             android:checkedButton="@+id/radio_month"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -44,7 +44,7 @@
         <LinearLayout
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corners_bg"
+            android:background="@drawable/bg_rounded_corners"
             android:layout_marginLeft="10dp"
             android:paddingRight="4dp"
             android:paddingEnd="4dp"
@@ -73,7 +73,7 @@
         <LinearLayout
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corners_bg"
+            android:background="@drawable/bg_rounded_corners"
             android:layout_marginLeft="10dp"
             android:paddingRight="4dp"
             android:paddingEnd="4dp"
